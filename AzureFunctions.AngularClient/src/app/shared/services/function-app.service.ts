@@ -7,7 +7,7 @@ import { HostingEnvironment } from './../models/arm/hosting-environment';
 import { FunctionAppContext } from './../function-app-context';
 import { CacheService } from 'app/shared/services/cache.service';
 import { Injectable, Injector } from '@angular/core';
-import { Headers, Response, ResponseType } from '@angular/http';
+import { Headers, Response, ResponseType, ResponseContentType } from '@angular/http';
 import { FunctionInfo } from 'app/shared/models/function-info';
 import { HttpResult } from './../models/http-result';
 import { ArmObj } from 'app/shared/models/arm/arm-obj';
@@ -240,6 +240,15 @@ export class FunctionAppService {
         return this.azure.executeWithConditions([], { resourceId: context.site.id }, t =>
             this._cacheService.postArm(`${context.site.id}/config/appsettings/list`, true)
                 .map(r => r.json() as ArmObj<{ [key: string]: string }>));
+    }
+
+    getAppContentAsZip(context: FunctionAppContext): Result<any> {
+        const client = this.getClient(context);
+        return client.execute({ resourceId: context.site.id }, t =>
+            this._cacheService
+                .get(context.urlTemplates.getDownloadFunctionAppContentUrl(), true, this.headers(t), null, ResponseContentType.Blob)
+                .map(r => new Blob([r.blob()], { type : 'application/octet-stream' }))
+            );
     }
 
     createFunctionV2(context: FunctionAppContext, functionName: string, files: any, config: any) {

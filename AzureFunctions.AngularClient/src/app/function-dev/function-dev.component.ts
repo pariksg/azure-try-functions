@@ -456,6 +456,20 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
             });
     }
 
+    downloadFunctionAppContent() {
+        this._globalStateService.setBusyState();
+        this.saveScript();
+        this._functionAppService.getAppContentAsZip(this.context).subscribe(
+            data => {
+                if (data.isSuccessful) {
+                    FileUtilities.saveFile(data.result, `${this.context.site.name}.zip`);
+                }
+                this._globalStateService.clearBusyState();
+            },
+            () => this._globalStateService.clearBusyState()
+        );
+    }
+
     contentChanged(content: string) {
         if (!this.scriptFile.isDirty) {
             this.scriptFile.isDirty = true;

@@ -162,6 +162,9 @@
   <data name="functionDev_requestBody" xml:space="preserve">
     <value>Request body</value>
   </data>
+  <data name="functionDev_saveAndDownload" xml:space="preserve">
+    <value>Save and download app content</value>
+  </data>
   <data name="functionDev_saveAndRun" xml:space="preserve">
     <value>Save and run</value>
   </data>
