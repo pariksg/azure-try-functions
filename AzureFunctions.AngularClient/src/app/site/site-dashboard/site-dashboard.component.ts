@@ -108,9 +108,9 @@ export class SiteDashboardComponent extends NavigableComponent implements OnDest
     setupNavigation(): Subscription {
         return this.navigationEvents
             .switchMap(viewInfo => {
-                if (this._globalStateService.showTryView) {
-                    this._globalStateService.setDisabledMessage(this._translateService.instant(PortalResources.try_appDisabled));
-                }
+                // if (this._globalStateService.showTryView) {
+                //     this._globalStateService.setDisabledMessage(this._translateService.instant(PortalResources.try_appDisabled));
+                // }
 
                 viewInfo.data.siteTabRevealedTraceKey = this._aiService.startTrace();
                 viewInfo.data.siteTabFullReadyTraceKey = this._aiService.startTrace();
