@@ -32,7 +32,7 @@ namespace Deploy
                 .Call(msBuild, $@"{deploymentSource}\AzureFunctions\AzureFunctions.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir=""%DEPLOYMENT_TEMP%"";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false  /p:DeleteExistingFiles=False /p:SolutionDir=""{deploymentSource}\.\\"" %SCM_BUILD_ARGS%")
                 .KuduSync()
                 .ChangeDirectory($@"{deploymentSource}\AzureFunctions.AngularClient")
-                .Call(yarn, "install", tries: 2)
+                .Call(yarn, "install", stopOnError: false)
                 .Call("npm", "rebuild node-sass")
                 .CleanAngularArtifacts()
                 .Call(ng, $"build --progress false --prod --environment=prod --output-path=\"{deploymentTempTarget}\\ng-min\"", tries: 2)
