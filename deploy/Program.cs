@@ -26,7 +26,6 @@ namespace Deploy
             DeploySdk
                 .StandardDeployment
                 .Call("npm", $"config set prefix {toolsDirectory}")
-                .Call("npm", "install -g @angular/cli@1.2.6")
                 .Call("npm", "install -g yarn")
                 .Call("nuget", $"restore {deploymentSource}\\AzureFunctions.sln")
                 .Call(msBuild, $@"{deploymentSource}\AzureFunctions\AzureFunctions.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir=""%DEPLOYMENT_TEMP%"";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false  /p:DeleteExistingFiles=False /p:SolutionDir=""{deploymentSource}\.\\"" %SCM_BUILD_ARGS%")
