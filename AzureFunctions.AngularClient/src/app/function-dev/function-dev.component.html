@@ -91,18 +91,20 @@
                             <span *ngIf="!isStandalone">
                               <button *ngIf="scriptFile.isDirty"
                                       [fnWriteAccess]="context" 
-                                      class="custom-button"
+                                      class="custom-button-invert"
                                       [class.dirty]="scriptFile.isDirty"
                                       (click)="downloadFunctionAppContent()">
-                                  {{ 'functionDev_saveAndDownload' | translate }}
+                                      <i class="fa fa-download"></i>
+                                      {{ 'functionDev_saveAndDownload' | translate }}
                               </button>
 
                               <button *ngIf="!scriptFile.isDirty"
                                       [fnWriteAccess]="context" 
-                                      class="custom-button"
+                                      class="custom-button-invert"
                                       [class.dirty]="scriptFile.isDirty"
                                       (click)="downloadFunctionAppContent()">
-                                  {{ 'downloadFunctionAppContent' | translate }}
+                                      <i class="fa fa-download"></i>
+                                      {{ 'downloadFunctionAppContent' | translate }}
                               </button>
 
                           </span>

@@ -66,7 +66,7 @@ export class TryFunctionsService {
             console.error(e);
         }
 
-        let url = `${Constants.serviceHost}api/templates?runtime='latest'`;
+        let url = `${Constants.serviceHost}api/templates?runtime='~2'`;
         return this._http.get(url, { headers: this.getPortalHeaders() })
             .retryWhen(this.retryAntares)
             .map(r => {

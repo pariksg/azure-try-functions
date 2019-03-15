@@ -27,7 +27,7 @@ namespace AzureFunctions.Common
         public const string PowerAppsReferrerSuffix = "powerapps.com";
         public const string PortalAnonymousUser = "Portal/1.0.0";
         public const string FrontEndAuthenticatedUser = "FrontEndAuthenticatedUser";
-        public const string CurrentLatestRuntimeVersion = "~1";
+        public const string CurrentLatestRuntimeVersion = "~2";
         public const string Authorization = "Authorization";
 
         private static object _lock = new object();

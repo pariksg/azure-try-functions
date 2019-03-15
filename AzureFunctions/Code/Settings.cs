@@ -61,8 +61,8 @@ namespace AzureFunctions.Code
                 },
                 functionsVersionInfo = new
                 {
-                    runtimeStable = new[] { "~1", "beta", "latest" },
-                    runtimeDefault = "~1"
+                    runtimeStable = new[] { "~1", "~2" },
+                    runtimeDefault = "~2"
                 }
             });
         }

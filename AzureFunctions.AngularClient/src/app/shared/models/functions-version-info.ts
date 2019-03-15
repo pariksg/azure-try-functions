@@ -14,7 +14,7 @@ export class FunctionsVersionInfoHelper {
 
     public static getFunctionGeneration(runtimeVersion: string) {
         if (!runtimeVersion) {
-            return 'V1';
+            return 'V2';
         }
 
         return (runtimeVersion.startsWith('~2')
