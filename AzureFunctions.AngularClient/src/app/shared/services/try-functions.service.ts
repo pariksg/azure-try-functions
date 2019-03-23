@@ -111,6 +111,13 @@ export class TryFunctionsService {
             .map(r => <UIResource>r.json());
     }
 
+    deleteTrialResource(): Observable<any> {
+        const url = this.tryAppServiceUrl + '/api/resource';
+        return this._http.delete(url, { headers: this.getTryAppServiceHeaders() })
+            .retryWhen(this.retryAntares)
+            .map(r => r.json());
+    }
+
     // to talk to Functions Portal
     private getPortalHeaders(contentType?: string): Headers {
         contentType = contentType || 'application/json';

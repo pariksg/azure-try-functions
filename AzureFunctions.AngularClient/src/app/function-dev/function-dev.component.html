@@ -106,7 +106,13 @@
                                       <i class="fa fa-download"></i>
                                       {{ 'downloadFunctionAppContent' | translate }}
                               </button>
-
+                          </span>
+                          <span *ngIf="!isStandalone">
+                            <button class="custom-button-invert"
+                                    (click)="deleteFunctionApp()">
+                                    <i class="fa fa-minus-circle"></i>
+                                    Delete
+                            </button>
                           </span>
 
               <div style="flex-grow:1"></div>

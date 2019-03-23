@@ -34,6 +34,8 @@ import { HttpRunModel } from '../shared/models/http-run';
 import { FunctionKeys } from '../shared/models/function-key';
 import { MonacoHelper } from '../shared/Utilities/monaco.helper';
 import { AccessibilityHelper } from '../shared/Utilities/accessibility-helper';
+import { Router } from '@angular/router';
+import { TryFunctionsService } from 'app/shared/services/try-functions.service';
 
 @Component({
     selector: 'function-dev',
@@ -99,7 +101,9 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         private _portalService: PortalService,
         private _globalStateService: GlobalStateService,
         private _translateService: TranslateService,
+        private _tryFunctionsService: TryFunctionsService,
         private _functionAppService: FunctionAppService,
+        private _router: Router,
         private cd: ChangeDetectorRef) {
         super('function-dev', _functionAppService, broadcastService, () => _globalStateService.setBusyState());
 
@@ -469,6 +473,20 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
             () => this._globalStateService.clearBusyState()
         );
     }
+
+    deleteFunctionApp() {
+        this.downloadFunctionAppContent();
+        this._globalStateService.setBusyState();
+        this._tryFunctionsService.deleteTrialResource().subscribe(
+            () => {
+                this._globalStateService.TrialExpired = true;
+                this._router.navigate([`/try`], { queryParams: { trial: true } } );
+                this._globalStateService.clearBusyState();
+            },
+            (error) => {
+                this._globalStateService.clearBusyState();
+            });
+        }
 
     contentChanged(content: string) {
         if (!this.scriptFile.isDirty) {
