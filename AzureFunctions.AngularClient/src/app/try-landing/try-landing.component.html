@@ -42,7 +42,7 @@
         </div>
         <div>
             <button class="custom-button"
-                    (click)="handleLoginClick('')">
+                    (click)="handleLoginClick('reCAPTCHA')">
                 {{ 'intro_createThisFunction' | translate }}
             </button>
             <div *ngIf="loginOptions" [class.login-box-ru]="currentCulture == 'ru'" [class.login-box]="currentCulture != 'ru'">
