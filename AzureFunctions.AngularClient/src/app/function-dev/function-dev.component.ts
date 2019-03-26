@@ -36,6 +36,7 @@ import { MonacoHelper } from '../shared/Utilities/monaco.helper';
 import { AccessibilityHelper } from '../shared/Utilities/accessibility-helper';
 import { Router } from '@angular/router';
 import { TryFunctionsService } from 'app/shared/services/try-functions.service';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Component({
     selector: 'function-dev',
@@ -480,6 +481,10 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         this._tryFunctionsService.deleteTrialResource().subscribe(
             () => {
                 this._globalStateService.TrialExpired = true;
+                Cookie.delete('TryAppServiceToken');
+                Cookie.delete('functionName');
+                Cookie.delete('provider');
+                Cookie.delete('templateId');
                 this._router.navigate([`/try`], { queryParams: { trial: true } } );
                 this._globalStateService.clearBusyState();
             },
