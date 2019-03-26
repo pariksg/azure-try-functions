@@ -39,7 +39,7 @@
         class="fa fa-info-circle tree-node-menu-item"
         [title]="node.disabledReason"></i>
 
-      <i *ngIf="!!node.newDashboardType"
+      <i *ngIf="!!node.newDashboardType && !showTryView"
           (click)="node.openCreateNew($event)"
           (keydown)="node.openCreateNew($event)"
           class="fa fa-plus link create-new"

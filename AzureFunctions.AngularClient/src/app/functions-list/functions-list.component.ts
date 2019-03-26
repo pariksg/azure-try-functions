@@ -58,6 +58,10 @@ export class FunctionsListComponent extends NavigableComponent implements OnDest
     setupNavigation(): Subscription {
         return this.navigationEvents
             .switchMap(viewInfo => {
+                if (this._globalStateService.showTryView) {
+                    this._globalStateService.setDisabledMessage(this._translateService.instant(PortalResources.try_appDisabled));
+                }
+
                 this.isLoading = true;
                 this._functionsNode = (<FunctionsNode>viewInfo.node);
                 this.appNode = (<AppNode>viewInfo.node.parent);
