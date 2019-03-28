@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PortalResources } from '../shared/models/portal-resources';
 import { GlobalStateService } from '../shared/services/global-state.service';
 import { AiService } from '../shared/services/ai.service';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 
 @Component({
@@ -47,6 +48,12 @@ export class TryNowComponent implements OnInit {
                 } else {
                     this.timerText = this._translateService.instant(PortalResources.tryNow_trialExpired);
                     this._globalStateService.TrialExpired = true;
+                    this._globalStateService.TryAppServiceToken = null;
+                    Cookie.delete('TryAppServiceToken');
+                    Cookie.delete('functionName');
+                    Cookie.delete('provider');
+                    Cookie.delete('templateId');
+                    this._globalStateService.setDisabledMessage('Your trial period expired!');
                     this._broadcastService.broadcast(BroadcastEvent.TrialExpired);
                 }
             });

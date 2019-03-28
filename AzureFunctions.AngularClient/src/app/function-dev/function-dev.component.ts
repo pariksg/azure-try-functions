@@ -481,6 +481,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         this._tryFunctionsService.deleteTrialResource().subscribe(
             () => {
                 this._globalStateService.TrialExpired = true;
+                this._globalStateService.TryAppServiceToken = null;
                 Cookie.delete('TryAppServiceToken');
                 Cookie.delete('functionName');
                 Cookie.delete('provider');
