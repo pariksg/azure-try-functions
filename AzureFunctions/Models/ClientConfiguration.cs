@@ -9,5 +9,8 @@ namespace AzureFunctions.Models
 
         [JsonProperty(PropertyName = "AzureResourceManagerEndpoint")]
         public string AzureResourceManagerEndpoint { get; set; }
+
+        [JsonProperty(PropertyName = "TryAppServiceUrl")]
+        public string TryAppServiceUrl { get; set; }
     }
 }

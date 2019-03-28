@@ -39,6 +39,11 @@ export class TryFunctionsService {
         private _userService: UserService,
         private _globalStateService: GlobalStateService) {
 
+        if (window.appsvc.env.tryAppServiceUrl)
+        {
+           this.tryAppServiceUrl = window.appsvc.env.tryAppServiceUrl;
+        }
+
         if (!_globalStateService.showTryView) {
             this._userService.getStartupInfo().subscribe(info => { this.token = info.token });
         }
