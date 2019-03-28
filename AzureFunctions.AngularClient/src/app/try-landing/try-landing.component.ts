@@ -65,7 +65,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         // and strangely the clearbusystate doesnt get called.
         // this.setBusyState();
         this.selectedFunction = this._tryFunctionsService.selectedFunction || 'HttpTrigger';
-        this.selectedLanguage = this._tryFunctionsService.selectedLanguage || 'CSharp';
+        this.selectedLanguage = this._tryFunctionsService.selectedLanguage || 'JavaScript';
 
         this._globalStateService.setBusyState();
 
