@@ -1,6 +1,6 @@
 @import '../../sass/common/variables';
 .wrapper {
-    background-color: #539CF6;
+    background-color: #1a1a1f;
     height: $top-bar-height;
     width: 100%;
     font-size: medium;
@@ -52,7 +52,10 @@ a {
 }
 
 .azure-logo-wrapper {
-    width: 235px
+    display: flex;
+    left: 15px;
+    position: absolute;
+    top: 12px;
 }
 
 .signup-button {
@@ -70,7 +73,6 @@ a {
     padding: 0px 36px 4px;
     text-align: center;
     text-decoration: none;
-    vertical-align: bottom;
 }
 
 .signup-button:hover {
