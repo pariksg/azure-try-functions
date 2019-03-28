@@ -53,7 +53,6 @@ export class TryNowComponent implements OnInit {
                     Cookie.delete('functionName');
                     Cookie.delete('provider');
                     Cookie.delete('templateId');
-                    this._globalStateService.setDisabledMessage('Your trial period expired!');
                     this._broadcastService.broadcast(BroadcastEvent.TrialExpired);
                 }
             });
