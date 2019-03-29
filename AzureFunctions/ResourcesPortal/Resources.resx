@@ -13,7 +13,19 @@
     Example:
     
     ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader><resheader name="version">2.0</resheader><resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader><resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader><data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data><data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data><data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64"><value>[base64 mime encoded serialized .NET Framework object]</value></data><data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64"><value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value><comment>This is a comment</comment></data>
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
                 
     There are any number of "resheader" rows that contain simple 
     name/value pairs.
@@ -47,10 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" 
-    xmlns="" 
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -2434,9 +2443,6 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
   <data name="showLogs" xml:space="preserve">
     <value>Show Logs...</value>
   </data>
-  <data name="status" xml:space="preserve">
-    <value>Status</value>
-  </data>
   <data name="commitIdAuthor" xml:space="preserve">
     <value>Commit ID (Author)</value>
   </data>
@@ -2629,9 +2635,6 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
   <data name="back" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="continue" xml:space="preserve">
-    <value>Continue</value>
-  </data>
   <data name="finish" xml:space="preserve">
     <value>Finish</value>
   </data>
@@ -2661,9 +2664,6 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
   </data>
   <data name="build" xml:space="preserve">
     <value>Build</value>
-  </data>
-  <data name="source" xml:space="preserve">
-    <value>Source</value>
   </data>
   <data name="account" xml:space="preserve">
     <value>Account</value>
@@ -2761,9 +2761,6 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
   <data name="webApp" xml:space="preserve">
     <value>Web App</value>
   </data>
-  <data name="slot" xml:space="preserve">
-    <value>Slot</value>
-  </data>
   <data name="vsoAccount" xml:space="preserve">
     <value>Visual Studio Online Account</value>
   </data>
@@ -2784,9 +2781,6 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
   </data>
   <data name="buildProvider" xml:space="preserve">
     <value>Build Provider</value>
-  </data>
-  <data name="configure" xml:space="preserve">
-    <value>Configure</value>
   </data>
   <data name="deploy" xml:space="preserve">
     <value>Deploy</value>
@@ -2835,5 +2829,32 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
   </data>
   <data name="functionsPreviewTitle" xml:space="preserve">
     <value>Functions (Preview)</value>
+  </data>
+  <data name="accelerate" xml:space="preserve">
+    <value>Accelerate your development with an event-driven, serverless compute experience.</value>
+  </data>
+  <data name="easier" xml:space="preserve">
+    <value>Executing code is about to get a whole lot easier</value>
+  </data>
+  <data name="faster" xml:space="preserve">
+    <value>Build apps faster with a serverless architecture</value>
+  </data>
+  <data name="freeRequests" xml:space="preserve">
+    <value>Get 1,000,000 Functions requests each month for free with your account.</value>
+  </data>
+  <data name="guest" xml:space="preserve">
+    <value>Be our guest for up to an hour of Azure Functions experience with no Azure subscription, free of charge and commitment.</value>
+  </data>
+  <data name="onDemandScale" xml:space="preserve">
+    <value>Scale on demand and pay only for the resources you consume.</value>
+  </data>
+  <data name="quickStart" xml:space="preserve">
+    <value>Get started quickly with a premade JavaScript Web API function</value>
+  </data>
+  <data name="stayLonger" xml:space="preserve">
+    <value>Stay longer for the full Azure Functions experience with an Azure free trial subscription.</value>
+  </data>
+  <data name="tryNow" xml:space="preserve">
+    <value>Try Azure Functions now</value>
   </data>
 </root>

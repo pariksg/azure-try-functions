@@ -19,7 +19,7 @@ namespace AzureFunctions.ResourcesPortal {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,15 @@ namespace AzureFunctions.ResourcesPortal {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        internal static string _continue {
+            get {
+                return ResourceManager.GetString("continue", resourceCulture);
             }
         }
         
@@ -201,6 +210,42 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string aadreg_youMayNeed {
             get {
                 return ResourceManager.GetString("aadreg_youMayNeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accelerate your development with an event-driven, serverless compute experience..
+        /// </summary>
+        internal static string accelerate {
+            get {
+                return ResourceManager.GetString("accelerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        internal static string account {
+            get {
+                return ResourceManager.GetString("account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        internal static string active {
+            get {
+                return ResourceManager.GetString("active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activity.
+        /// </summary>
+        internal static string activity {
+            get {
+                return ResourceManager.GetString("activity", resourceCulture);
             }
         }
         
@@ -619,7 +664,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrating the runtime version is also coupled with upgrades to languages and binding dependecies that may introduce breaking changes. Please create a blank function app to upgrade major versions of the runtime..
+        ///   Looks up a localized string similar to Major version upgrades can introduce breaking changes to languages and bindings. When upgrading major versions of the runtime, consider creating a new function app and migrate your functions to this new app..
         /// </summary>
         internal static string appFunctionSettings_warning_7 {
             get {
@@ -687,6 +732,60 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string appServicePlanPricingTier {
             get {
                 return ResourceManager.GetString("appServicePlanPricingTier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to restart {0}.
+        /// </summary>
+        internal static string appServiceRestartFail {
+            get {
+                return ResourceManager.GetString("appServiceRestartFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} got restarted&apos;.
+        /// </summary>
+        internal static string appServiceRestartSuccess {
+            get {
+                return ResourceManager.GetString("appServiceRestartSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to start {0}.
+        /// </summary>
+        internal static string appServiceStartFail {
+            get {
+                return ResourceManager.GetString("appServiceStartFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} got started&apos;.
+        /// </summary>
+        internal static string appServiceStartSuccess {
+            get {
+                return ResourceManager.GetString("appServiceStartSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to stop {0}.
+        /// </summary>
+        internal static string appServiceStopFail {
+            get {
+                return ResourceManager.GetString("appServiceStopFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} got stopped&apos;.
+        /// </summary>
+        internal static string appServiceStopSuccess {
+            get {
+                return ResourceManager.GetString("appServiceStopSuccess", resourceCulture);
             }
         }
         
@@ -772,6 +871,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authorize.
+        /// </summary>
+        internal static string authorize {
+            get {
+                return ResourceManager.GetString("authorize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authorized as:.
+        /// </summary>
+        internal static string authorizedAs {
+            get {
+                return ResourceManager.GetString("authorizedAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto Swap.
         /// </summary>
         internal static string autoSwapEnabledLabel {
@@ -795,15 +912,6 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string autoSwapSlotNameLabel {
             get {
                 return ResourceManager.GetString("autoSwapSlotNameLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to production.
-        /// </summary>
-        internal static string productionSlotDisplayName {
-            get {
-                return ResourceManager.GetString("productionSlotDisplayName", resourceCulture);
             }
         }
         
@@ -849,6 +957,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string azureFunctionsRuntime {
             get {
                 return ResourceManager.GetString("azureFunctionsRuntime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string back {
+            get {
+                return ResourceManager.GetString("back", resourceCulture);
             }
         }
         
@@ -1249,11 +1366,74 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configure continuous integration with a Bitbucket repo..
+        /// </summary>
+        internal static string bitbucketDesc {
+            get {
+                return ResourceManager.GetString("bitbucketDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Branch.
+        /// </summary>
+        internal static string branch {
+            get {
+                return ResourceManager.GetString("branch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brazil South.
         /// </summary>
         internal static string brazilsouth {
             get {
                 return ResourceManager.GetString("brazilsouth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build.
+        /// </summary>
+        internal static string build {
+            get {
+                return ResourceManager.GetString("build", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build Definition.
+        /// </summary>
+        internal static string buildDefinition {
+            get {
+                return ResourceManager.GetString("buildDefinition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build Provider.
+        /// </summary>
+        internal static string buildProvider {
+            get {
+                return ResourceManager.GetString("buildProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build Triggered.
+        /// </summary>
+        internal static string buildTriggered {
+            get {
+                return ResourceManager.GetString("buildTriggered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build: {0}.
+        /// </summary>
+        internal static string buildUrl {
+            get {
+                return ResourceManager.GetString("buildUrl", resourceCulture);
             }
         }
         
@@ -1303,6 +1483,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authorize.
+        /// </summary>
+        internal static string changeAuthorization {
+            get {
+                return ResourceManager.GetString("changeAuthorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checkin Message.
+        /// </summary>
+        internal static string checkinMessage {
+            get {
+                return ResourceManager.GetString("checkinMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ARR Affinity.
         /// </summary>
         internal static string clientAffinityEnabledLabel {
@@ -1326,6 +1524,24 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string close {
             get {
                 return ResourceManager.GetString("close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        internal static string code {
+            get {
+                return ResourceManager.GetString("code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commit ID (Author).
+        /// </summary>
+        internal static string commitIdAuthor {
+            get {
+                return ResourceManager.GetString("commitIdAuthor", resourceCulture);
             }
         }
         
@@ -1501,6 +1717,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to create a slot.
+        /// </summary>
+        internal static string createdNewSlotFail {
+            get {
+                return ResourceManager.GetString("createdNewSlotFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created new slot.
+        /// </summary>
+        internal static string createdNewSlotSuccess {
+            get {
+                return ResourceManager.GetString("createdNewSlotSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search by trigger, language, or description.
         /// </summary>
         internal static string createFunction_search {
@@ -1528,6 +1762,42 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to create new Web Application for test environment.
+        /// </summary>
+        internal static string createTestWebAppFail {
+            get {
+                return ResourceManager.GetString("createTestWebAppFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created new Web Application for test environment.
+        /// </summary>
+        internal static string createTestWebAppSuccess {
+            get {
+                return ResourceManager.GetString("createTestWebAppSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create Visual Studio Team Services account.
+        /// </summary>
+        internal static string createVSTSAccountFail {
+            get {
+                return ResourceManager.GetString("createVSTSAccountFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created new Visual Studio Team Services account.
+        /// </summary>
+        internal static string createVSTSAccountSuccess {
+            get {
+                return ResourceManager.GetString("createVSTSAccountSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your trial has expired.
         /// </summary>
         internal static string dashboard_yourTrialExpiered {
@@ -1542,6 +1812,42 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string debug {
             get {
                 return ResourceManager.GetString("debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy.
+        /// </summary>
+        internal static string deploy {
+            get {
+                return ResourceManager.GetString("deploy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to deploy to {0}.
+        /// </summary>
+        internal static string deployedFailedTo {
+            get {
+                return ResourceManager.GetString("deployedFailedTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deployed Successfully to {0}.
+        /// </summary>
+        internal static string deployedSuccessfullyTo {
+            get {
+                return ResourceManager.GetString("deployedSuccessfullyTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deployment Center.
+        /// </summary>
+        internal static string deploymentCenter {
+            get {
+                return ResourceManager.GetString("deploymentCenter", resourceCulture);
             }
         }
         
@@ -1569,6 +1875,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string discard {
             get {
                 return ResourceManager.GetString("discard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully disconnected Continuous Delivery for {0}.
+        /// </summary>
+        internal static string disconnectCICDVSOSuccess {
+            get {
+                return ResourceManager.GetString("disconnectCICDVSOSuccess", resourceCulture);
             }
         }
         
@@ -1632,6 +1947,51 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string downloadProfile {
             get {
                 return ResourceManager.GetString("downloadProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure continuous integration with a Dropbox folder.
+        /// </summary>
+        internal static string dropboxDesc {
+            get {
+                return ResourceManager.GetString("dropboxDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A function that will be run whenever an Activity is called by an orchestrator function..
+        /// </summary>
+        internal static string DurableFunctionsActivity_description {
+            get {
+                return ResourceManager.GetString("DurableFunctionsActivity_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A function that will trigger whenever it receives an HTTP request to execute an orchestrator function..
+        /// </summary>
+        internal static string DurableFunctionsHttpStart_description {
+            get {
+                return ResourceManager.GetString("DurableFunctionsHttpStart_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An orchestrator function that invokes activity functions in a sequence..
+        /// </summary>
+        internal static string DurableFunctionsOrchestrator_description {
+            get {
+                return ResourceManager.GetString("DurableFunctionsOrchestrator_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Executing code is about to get a whole lot easier.
+        /// </summary>
+        internal static string easier {
+            get {
+                return ResourceManager.GetString("easier", resourceCulture);
             }
         }
         
@@ -1834,6 +2194,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entity.
+        /// </summary>
+        internal static string entity {
+            get {
+                return ResourceManager.GetString("entity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity:.
+        /// </summary>
+        internal static string entityColon {
+            get {
+                return ResourceManager.GetString("entityColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The application is offline. Please check your internet connection..
         /// </summary>
         internal static string error_appOffline {
@@ -1969,7 +2347,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We are not able to delete function {{functionName}}. Please try again later..
+        ///   Looks up a localized string similar to We are not able to delete function &apos;{0}&apos;. Please try again later..
         /// </summary>
         internal static string error_unableToDeleteFunction {
             get {
@@ -2050,7 +2428,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We are unable to get function {{functionName}}. Please try again later..
+        ///   Looks up a localized string similar to We are unable to get the content for function &apos;{0}&apos;. Please try again later..
         /// </summary>
         internal static string error_unableToRetrieveFunction {
             get {
@@ -2127,6 +2505,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string error_unableToSaveFileContentThroughKudu {
             get {
                 return ResourceManager.GetString("error_unableToSaveFileContentThroughKudu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are unable to save the content for function &apos;{0}&apos;..
+        /// </summary>
+        internal static string error_unableToSaveFunction {
+            get {
+                return ResourceManager.GetString("error_unableToSaveFunction", resourceCulture);
             }
         }
         
@@ -2383,6 +2770,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Experimental Language Support:.
+        /// </summary>
+        internal static string experimentalLanguageSupport {
+            get {
+                return ResourceManager.GetString("experimentalLanguageSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Express AAD Registration.
         /// </summary>
         internal static string expressAADRegistration {
@@ -2446,6 +2842,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deploy from a public Git or Mercurial repo..
+        /// </summary>
+        internal static string externalDesc {
+            get {
+                return ResourceManager.GetString("externalDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We are not able to get the list of installed runtime extensions.
         /// </summary>
         internal static string failedToGetFunctionRuntimeExtensions {
@@ -2487,6 +2892,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string failedToUnInstallFunctionRuntimeExtension {
             get {
                 return ResourceManager.GetString("failedToUnInstallFunctionRuntimeExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build apps faster with a serverless architecture.
+        /// </summary>
+        internal static string faster {
+            get {
+                return ResourceManager.GetString("faster", resourceCulture);
             }
         }
         
@@ -3373,6 +3787,33 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        internal static string finish {
+            get {
+                return ResourceManager.GetString("finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        internal static string folder {
+            get {
+                return ResourceManager.GetString("folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get 1,000,000 Functions requests each month for free with your account..
+        /// </summary>
+        internal static string freeRequests {
+            get {
+                return ResourceManager.GetString("freeRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Function Apps.
         /// </summary>
         internal static string functionApps {
@@ -4093,6 +4534,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Functions (Preview).
+        /// </summary>
+        internal static string functionsPreviewTitle {
+            get {
+                return ResourceManager.GetString("functionsPreviewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create + get started.
         /// </summary>
         internal static string gettingStarted_createGetStarted {
@@ -4246,6 +4696,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Git Clone Uri.
+        /// </summary>
+        internal static string gitCloneUri {
+            get {
+                return ResourceManager.GetString("gitCloneUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure continuous integration with a Github repo..
+        /// </summary>
+        internal static string githubDesc {
+            get {
+                return ResourceManager.GetString("githubDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group by location.
         /// </summary>
         internal static string grouping_location {
@@ -4278,6 +4746,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string grouping_subscription {
             get {
                 return ResourceManager.GetString("grouping_subscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Be our guest for up to an hour of Azure Functions experience with no Azure subscription, free of charge and commitment..
+        /// </summary>
+        internal static string guest {
+            get {
+                return ResourceManager.GetString("guest", resourceCulture);
             }
         }
         
@@ -4768,6 +5245,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load Test.
+        /// </summary>
+        internal static string loadTest {
+            get {
+                return ResourceManager.GetString("loadTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy from a local Git repo..
+        /// </summary>
+        internal static string localGitDesc {
+            get {
+                return ResourceManager.GetString("localGitDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location.
         /// </summary>
         internal static string location {
@@ -4791,6 +5286,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string locationCount {
             get {
                 return ResourceManager.GetString("locationCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log.
+        /// </summary>
+        internal static string log {
+            get {
+                return ResourceManager.GetString("log", resourceCulture);
             }
         }
         
@@ -4867,6 +5371,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to download log content - &apos;{0}&apos;.
+        /// </summary>
+        internal static string logStreaming_failedToDownload {
+            get {
+                return ResourceManager.GetString("logStreaming_failedToDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logs.
         /// </summary>
         internal static string logStreaming_logs {
@@ -4876,11 +5389,29 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No logs to display.
+        /// </summary>
+        internal static string logStreaming_noLogs {
+            get {
+                return ResourceManager.GetString("logStreaming_noLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pause.
         /// </summary>
         internal static string logStreaming_pause {
             get {
                 return ResourceManager.GetString("logStreaming_pause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging paused.
+        /// </summary>
+        internal static string logStreaming_paused {
+            get {
+                return ResourceManager.GetString("logStreaming_paused", resourceCulture);
             }
         }
         
@@ -5173,6 +5704,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scale on demand and pay only for the resources you consume..
+        /// </summary>
+        internal static string onDemandScale {
+            get {
+                return ResourceManager.GetString("onDemandScale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync content from a OneDrive cloud folder..
+        /// </summary>
+        internal static string onedriveDesc {
+            get {
+                return ResourceManager.GetString("onedriveDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         internal static string open {
@@ -5214,6 +5763,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string orchestrateWithLogicApps_title {
             get {
                 return ResourceManager.GetString("orchestrateWithLogicApps_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organization.
+        /// </summary>
+        internal static string organization {
+            get {
+                return ResourceManager.GetString("organization", resourceCulture);
             }
         }
         
@@ -5263,6 +5821,33 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Production.
+        /// </summary>
+        internal static string production {
+            get {
+                return ResourceManager.GetString("production", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to production.
+        /// </summary>
+        internal static string productionSlotDisplayName {
+            get {
+                return ResourceManager.GetString("productionSlotDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        internal static string project {
+            get {
+                return ResourceManager.GetString("project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to App Service supports installing newer versions of Python. Click here to learn more..
         /// </summary>
         internal static string pythonInfoText {
@@ -5286,6 +5871,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string pythonVersionLabelHelp {
             get {
                 return ResourceManager.GetString("pythonVersionLabelHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get started quickly with a premade JavaScript Web API function.
+        /// </summary>
+        internal static string quickStart {
+            get {
+                return ResourceManager.GetString("quickStart", resourceCulture);
             }
         }
         
@@ -5344,11 +5938,38 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Redeploy.
+        /// </summary>
+        internal static string redeploy {
+            get {
+                return ResourceManager.GetString("redeploy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Region.
         /// </summary>
         internal static string region {
             get {
                 return ResourceManager.GetString("region", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Release Definition.
+        /// </summary>
+        internal static string releaseDefinition {
+            get {
+                return ResourceManager.GetString("releaseDefinition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Release: {0}.
+        /// </summary>
+        internal static string releaseUrl {
+            get {
+                return ResourceManager.GetString("releaseUrl", resourceCulture);
             }
         }
         
@@ -5367,6 +5988,24 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string remoteDebuggingVersionLabel {
             get {
                 return ResourceManager.GetString("remoteDebuggingVersionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repository.
+        /// </summary>
+        internal static string repository {
+            get {
+                return ResourceManager.GetString("repository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repository Type.
+        /// </summary>
+        internal static string repoType {
+            get {
+                return ResourceManager.GetString("repoType", resourceCulture);
             }
         }
         
@@ -5421,6 +6060,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string restart {
             get {
                 return ResourceManager.GetString("restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rollback Enabled.
+        /// </summary>
+        internal static string rollbackEnabled {
+            get {
+                return ResourceManager.GetString("rollbackEnabled", resourceCulture);
             }
         }
         
@@ -5551,6 +6199,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Source Control Type.
+        /// </summary>
+        internal static string scmType {
+            get {
+                return ResourceManager.GetString("scmType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scope to this item.
         /// </summary>
         internal static string scopeToItem {
@@ -5610,6 +6267,42 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string serviceBusPicker_serviceBus {
             get {
                 return ResourceManager.GetString("serviceBusPicker_serviceBus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to setup Continuous Delivery.
+        /// </summary>
+        internal static string setupCDFail {
+            get {
+                return ResourceManager.GetString("setupCDFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully setup Continuous Delivery for the repository.
+        /// </summary>
+        internal static string setupCDSuccess {
+            get {
+                return ResourceManager.GetString("setupCDSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully setup Continuous Delivery and triggered build.
+        /// </summary>
+        internal static string setupCDSuccessAndTriggerBuild {
+            get {
+                return ResourceManager.GetString("setupCDSuccessAndTriggerBuild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Logs....
+        /// </summary>
+        internal static string showLogs {
+            get {
+                return ResourceManager.GetString("showLogs", resourceCulture);
             }
         }
         
@@ -5956,6 +6649,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slot.
+        /// </summary>
+        internal static string slot {
+            get {
+                return ResourceManager.GetString("slot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deployment slots let you deploy different versions of your function app to different URLs. You can test a certain version and then swap content and configuration between slots..
         /// </summary>
         internal static string slotNew_desc {
@@ -6091,6 +6793,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Source Control.
+        /// </summary>
+        internal static string sourceControl {
+            get {
+                return ResourceManager.GetString("sourceControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source Provider.
+        /// </summary>
+        internal static string sourceProvider {
+            get {
+                return ResourceManager.GetString("sourceProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to South Central US.
         /// </summary>
         internal static string southcentralus {
@@ -6177,6 +6897,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string status {
             get {
                 return ResourceManager.GetString("status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stay longer for the full Azure Functions experience with an Azure free trial subscription..
+        /// </summary>
+        internal static string stayLonger {
+            get {
+                return ResourceManager.GetString("stayLonger", resourceCulture);
             }
         }
         
@@ -6339,6 +7068,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string subscriptionName {
             get {
                 return ResourceManager.GetString("subscriptionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        internal static string summary {
+            get {
+                return ResourceManager.GetString("summary", resourceCulture);
             }
         }
         
@@ -6625,6 +7363,24 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to swap slot {0} with {1}.
+        /// </summary>
+        internal static string swappedSlotFail {
+            get {
+                return ResourceManager.GetString("swappedSlotFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swapped slot {0} with {1}.
+        /// </summary>
+        internal static string swappedSlotSuccess {
+            get {
+                return ResourceManager.GetString("swappedSlotSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to API definition.
         /// </summary>
         internal static string tab_api_definition {
@@ -6751,6 +7507,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Durable Functions.
+        /// </summary>
+        internal static string temp_category_durableFunctions {
+            get {
+                return ResourceManager.GetString("temp_category_durableFunctions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template.
         /// </summary>
         internal static string template {
@@ -6819,6 +7584,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string test {
             get {
                 return ResourceManager.GetString("test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string time {
+            get {
+                return ResourceManager.GetString("time", resourceCulture);
             }
         }
         
@@ -7008,6 +7782,15 @@ namespace AzureFunctions.ResourcesPortal {
         internal static string tryLanding_microsoftAcccount {
             get {
                 return ResourceManager.GetString("tryLanding_microsoftAcccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try Azure Functions now.
+        /// </summary>
+        internal static string tryNow {
+            get {
+                return ResourceManager.GetString("tryNow", resourceCulture);
             }
         }
         
@@ -7309,7 +8092,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This field can only contain letters, numbers (0-9), periods ("."), and underscores ("_").
+        ///   Looks up a localized string similar to This field can only contain letters, numbers (0-9), periods (&quot;.&quot;), and underscores (&quot;_&quot;).
         /// </summary>
         internal static string validation_linuxAppSettingNameError {
             get {
@@ -7363,11 +8146,65 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Instructions.
+        /// </summary>
+        internal static string viewInstructions {
+            get {
+                return ResourceManager.GetString("viewInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual Studio Online Account.
+        /// </summary>
+        internal static string vsoAccount {
+            get {
+                return ResourceManager.GetString("vsoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully triggered Continuous Delivery with latest source code from repository.
+        /// </summary>
+        internal static string vsoSync {
+            get {
+                return ResourceManager.GetString("vsoSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual Studio Team Service Account.
+        /// </summary>
+        internal static string vstsAccount {
+            get {
+                return ResourceManager.GetString("vstsAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure continuous integration with a VSTS repo..
+        /// </summary>
+        internal static string vstsDesc {
+            get {
+                return ResourceManager.GetString("vstsDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warning.
         /// </summary>
         internal static string warning {
             get {
                 return ResourceManager.GetString("warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web App.
+        /// </summary>
+        internal static string webApp {
+            get {
+                return ResourceManager.GetString("webApp", resourceCulture);
             }
         }
         
