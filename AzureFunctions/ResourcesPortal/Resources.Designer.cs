@@ -4750,7 +4750,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Be our guest for up to an hour of Azure Functions experience with no Azure subscription, free of charge and commitment..
+        ///   Looks up a localized string similar to For up to an hour, try out Azure Functions with no Azure subscription..
         /// </summary>
         internal static string guest {
             get {
@@ -5875,7 +5875,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get started quickly with a premade JavaScript Web API function.
+        ///   Looks up a localized string similar to Get started quickly with an HTTP triggered JavaScript function.
         /// </summary>
         internal static string quickStart {
             get {
@@ -6901,7 +6901,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stay longer for the full Azure Functions experience with an Azure free trial subscription..
+        ///   Looks up a localized string similar to Sign up for an Azure free trial to get the full Azure Functions experience..
         /// </summary>
         internal static string stayLonger {
             get {

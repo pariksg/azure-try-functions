@@ -2843,16 +2843,16 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
     <value>Get 1,000,000 Functions requests each month for free with your account.</value>
   </data>
   <data name="guest" xml:space="preserve">
-    <value>Be our guest for up to an hour of Azure Functions experience with no Azure subscription, free of charge and commitment.</value>
+    <value>For up to an hour, try out Azure Functions with no Azure subscription.</value>
   </data>
   <data name="onDemandScale" xml:space="preserve">
     <value>Scale on demand and pay only for the resources you consume.</value>
   </data>
   <data name="quickStart" xml:space="preserve">
-    <value>Get started quickly with a premade JavaScript Web API function</value>
+    <value>Get started quickly with an HTTP triggered JavaScript function</value>
   </data>
   <data name="stayLonger" xml:space="preserve">
-    <value>Stay longer for the full Azure Functions experience with an Azure free trial subscription.</value>
+    <value>Sign up for an Azure free trial to get the full Azure Functions experience.</value>
   </data>
   <data name="tryNow" xml:space="preserve">
     <value>Try Azure Functions now</value>
