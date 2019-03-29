@@ -905,5 +905,14 @@ export class PortalResources
     public static DurableFunctionsOrchestrator_description: string = "DurableFunctionsOrchestrator_description";
     public static DurableFunctionsHttpStart_description: string = "DurableFunctionsHttpStart_description";
     public static functionsPreviewTitle: string = "functionsPreviewTitle";
+    public static accelerate: string = "accelerate";
+    public static easier: string = "easier";
+    public static faster: string = "faster";
+    public static freeRequests: string = "freeRequests";
+    public static guest: string = "guest";
+    public static onDemandScale: string = "onDemandScale";
+    public static quickStart: string = "quickStart";
+    public static stayLonger: string = "stayLonger";
+    public static tryNow: string = "tryNow";
 }
 

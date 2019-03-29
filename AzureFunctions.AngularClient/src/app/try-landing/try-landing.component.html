@@ -3,12 +3,12 @@
 <div class="container trylanding-container">
     <div [ngClass]="busyState?.busy? 'trylanding-body-disabled' : 'trylanding-body'">
     <div>
-        <h1>Azure Functions</h1>
-        <h2>Build apps faster with a serverless architecture</h2>
-        <p>Accelerate your development with an event-driven, serverless compute experience.</p>
-        <p>Scale on demand and pay only for the resources you consume.</p>
-        <h2>Executing code is about to get a whole lot easier</h2>
-        <p>Get 1,000,000 Functions requests each month for free with your account</p>
+        <h1> {{ 'azureFunctions' | translate }} </h1>
+        <h2> {{ 'faster' | translate }} </h2>
+        <p> {{ 'accelerate' | translate }} </p>
+        <p> {{ 'onDemandScale' | translate }} </p>
+        <h2> {{ 'easier' | translate }} </h2>
+        <p> {{ 'freeRequests' | translate }} </p>
     </div>
         <svg style="display:none; visibility:hidden;">
             <defs>
@@ -22,13 +22,13 @@
         </svg><svg aria-hidden="true" role="presentation">
             <use xlink:href="#svg-functions"></use>
         </svg>
-        <h2>Get started quickly with a premade JavaScript Web API function</h2>
-        <p>Be our guest for up to an hour of Azure Functions experience with no Azure subscription, free of charge and commitment.</p>
-        <p>Stay longer for the full Azure Functions experience with an Azure free trial subscription.</p>
+        <h2> {{ 'quickStart' | translate }} </h2>
+        <p> {{ 'guest' | translate }} </p>
+        <p> {{ 'stayLonger' | translate }} </p>
         <div>
             <button class="custom-button"
                     (click)="handleLoginClick('reCAPTCHA')">
-                Try Azure Functions now
+                {{ 'tryNow' | translate }}
             </button>
         </div>
 
