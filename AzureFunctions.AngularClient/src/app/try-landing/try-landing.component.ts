@@ -65,7 +65,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         // and strangely the clearbusystate doesnt get called.
         // this.setBusyState();
         this.selectedFunction = this._tryFunctionsService.selectedFunction || 'HttpTrigger';
-        this.selectedLanguage = this._tryFunctionsService.selectedLanguage || 'CSharp';
+        this.selectedLanguage = this._tryFunctionsService.selectedLanguage || 'JavaScript';
 
         this._globalStateService.setBusyState();
 
@@ -82,7 +82,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         return t.id === this.selectedFunction + '-' + this.selectedLanguage;
                     });
 
-                    if (selectedTemplate) {
+                    if (selectedTemplate && !this._globalStateService.TrialExpired) {
                         this.setBusyState();
                         this._tryFunctionsService.createTrialResource(selectedTemplate,
                             this._tryFunctionsService.selectedProvider, this._tryFunctionsService.selectedFunctionName)
@@ -96,7 +96,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                     // we'll get a HTTP 400 ..so lets get it.
                                     this._tryFunctionsService.getTrialResource(this._tryFunctionsService.selectedProvider)
                                         .subscribe((resource) => {
-                                            this.createFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
+                                            this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                         });
                                 } else {
                                     this.clearBusyState();
@@ -263,6 +263,50 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                 }
             },
             e => this.clearBusyState());
+    }
+
+    navigateToFunctioninResource(resource: UIResource, selectedTemplate: FunctionTemplate, functionName: string) {
+        const scmUrl = resource.gitUrl.substring(0, resource.gitUrl.lastIndexOf('/'));
+        const encryptedCreds = btoa(scmUrl.substring(8, scmUrl.indexOf('@')));
+
+        const tryfunctionContainer = <ArmObj<Site>>{
+            id: resource.csmId,
+            name: resource.csmId.substring(resource.csmId.lastIndexOf('/') + 1, resource.csmId.length),
+            type: 'Microsoft.Web/sites',
+            kind: 'functionapp',
+            location: 'West US',
+            properties: {
+                state: 'Running',
+                hostNames: null,
+                hostNameSslStates: [
+                    {
+                        name: (resource.csmId.substring(resource.csmId.lastIndexOf('/') + 1, resource.csmId.length) + '.scm.azurewebsites.net'),
+                        hostType: 1
+                    },
+                    {
+                        name: (resource.csmId.substring(resource.csmId.lastIndexOf('/') + 1, resource.csmId.length) + '.azurewebsites.net'),
+                        hostType: 0
+                    }],
+                sku: 'Free',
+                containerSize: 128,
+                serverFarmId: null,
+                enabled: true,
+                defaultHostName: (resource.csmId.substring(resource.csmId.lastIndexOf('/') + 1, resource.csmId.length) + '.azurewebsites.net')
+            },
+            tryScmCred: encryptedCreds
+        };
+
+        this._tryFunctionsService.functionContainer = tryfunctionContainer;
+        this.context = ArmUtil.mapArmSiteToContext(tryfunctionContainer, this._injector);
+        this._armTryService.tryFunctionAppContext = this.context;
+        this._tryFunctionsService.functionAppContext = this.context;
+        this._functionAppService.setTryFunctionsToken(encryptedCreds);
+
+        this._userService.setTryUserName(resource.userName);
+        this.setBusyState();
+        const navId = this.context.site.id.slice(1, this.context.site.id.length).toLowerCase().replace('/providers/microsoft.web', '');
+        this._router.navigate([`/resources/${navId}}/functions/${functionName}`], { queryParams: Url.getQueryStringObj() });
+        this.clearBusyState();
     }
 
     setBusyState() {

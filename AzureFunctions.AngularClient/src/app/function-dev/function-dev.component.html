@@ -88,6 +88,32 @@
                                     {{ 'cancel' | translate }}
                                 </button>
                             </span>
+                            <span *ngIf="!isStandalone">
+                              <button *ngIf="scriptFile.isDirty"
+                                      [fnWriteAccess]="context" 
+                                      class="custom-button-invert"
+                                      [class.dirty]="scriptFile.isDirty"
+                                      (click)="downloadFunctionAppContent()">
+                                      <i class="fa fa-download"></i>
+                                      {{ 'functionDev_saveAndDownload' | translate }}
+                              </button>
+
+                              <button *ngIf="!scriptFile.isDirty"
+                                      [fnWriteAccess]="context" 
+                                      class="custom-button-invert"
+                                      [class.dirty]="scriptFile.isDirty"
+                                      (click)="downloadFunctionAppContent()">
+                                      <i class="fa fa-download"></i>
+                                      {{ 'downloadFunctionAppContent' | translate }}
+                              </button>
+                          </span>
+                          <span *ngIf="!isStandalone">
+                            <button class="custom-button-invert"
+                                    (click)="deleteFunctionApp()">
+                                    <i class="fa fa-minus-circle"></i>
+                                    {{ '_delete' | translate }}
+                                  </button>
+                          </span>
 
               <div style="flex-grow:1"></div>
 

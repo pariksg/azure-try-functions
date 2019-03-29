@@ -123,8 +123,8 @@ export class FunctionRuntimeComponent extends FunctionAppContextComponent {
                 displayLabel: '~1',
                 value: '~1'
             }, {
-                displayLabel: 'beta',
-                value: 'beta'
+                displayLabel: '~2',
+                value: '~2'
             }];
 
         this.proxySettingValueStream = new Subject<boolean>();
@@ -254,7 +254,7 @@ export class FunctionRuntimeComponent extends FunctionAppContextComponent {
                 this.extensionVersion = appSettings.properties[Constants.runtimeVersionAppSettingName];
 
                 if (!this.extensionVersion) {
-                    this.extensionVersion = Constants.latest;
+                    this.extensionVersion = '~2';
                 }
 
                 this.setNeedUpdateExtensionVersion();

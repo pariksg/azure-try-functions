@@ -95,10 +95,16 @@ export class FunctionManageComponent extends NavigableComponent {
     setupNavigation(): Subscription {
         return this.navigationEvents
             .do(() => this._globalStateService.setBusyState())
-            .switchMap(view => Observable.zip(
-                this._functionAppService.getAppContext(view.siteDescriptor.getTrimmedResourceId()),
-                Observable.of(view)
-            ))
+            .switchMap(view => {
+                if (this._globalStateService.showTryView) {
+                    this._globalStateService.setDisabledMessage(this._translateService.instant(PortalResources.try_appDisabled));
+                }
+
+                return Observable.zip(
+                    this._functionAppService.getAppContext(view.siteDescriptor.getTrimmedResourceId()),
+                    Observable.of(view));
+            }
+            )
             .switchMap(tuple => Observable.zip(
                 this._functionAppService.getRuntimeGeneration(tuple[0]),
                 this._functionAppService.getFunction(tuple[0], tuple[1].functionDescriptor.name),

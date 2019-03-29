@@ -4,6 +4,21 @@ h1, h2{
     margin-top: 30px;
 }
 
+h1 {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+h2 {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+p {
+    font-size: larger;
+    font-weight: bold;
+}
+
 label {
     display: block;
     font-weight: 500;
@@ -16,10 +31,11 @@ label {
     transform-style: preserve-3d;
     width: 900px;
     padding-top: 30px;
+    text-align: center;
 }
 
 .container > div{
-    text-align: left;
+    text-align: center;
 }
 
 .start-banner{
@@ -139,9 +155,10 @@ button {
     width: 70px;
     height: 70px;
 }
+
 .trylanding-body-disabled{
-    display: none;
 }
+
 .trylanding-footer{
     padding: 10px 0 25px 0px;
 }
@@ -155,6 +172,15 @@ button {
     margin: 30px 0px;
     display: inline-block;
     vertical-align: top;
+    padding-right: 45px;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    border: 1px solid transparent;
+    font-size: 24px;
+    font-weight: 300;
+    padding: 0px 36px 4px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .wa-button {

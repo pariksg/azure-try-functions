@@ -81,6 +81,10 @@ export class FunctionMonitorComponent extends BaseFunctionComponent {
     setupNavigation(): Subscription {
         return this.functionChangedEvents
             .switchMap(fi => {
+                if (this.globalStateService.showTryView) {
+                    this.globalStateService.setDisabledMessage(this._translateService.instant(PortalResources.try_appDisabled));
+                }
+
                 this.currentFunction = fi.functionInfo.result;
                 this.globalStateService.setBusyState();
 

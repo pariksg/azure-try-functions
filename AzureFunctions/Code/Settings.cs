@@ -19,7 +19,8 @@ namespace AzureFunctions.Code
             _clientConfig = new ClientConfiguration()
             {
                 RuntimeType = this.RuntimeType.ToString(),
-                AzureResourceManagerEndpoint = this.AzureResourceManagerEndpoint
+                AzureResourceManagerEndpoint = this.AzureResourceManagerEndpoint,
+                TryAppServiceUrl = this.TryAppServiceUrl
             };
         }
 
@@ -57,12 +58,13 @@ namespace AzureFunctions.Code
                 {
                     hostName = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME"),
                     runtimeType = _clientConfig.RuntimeType,
-                    azureResourceManagerEndpoint = _clientConfig.AzureResourceManagerEndpoint
+                    azureResourceManagerEndpoint = _clientConfig.AzureResourceManagerEndpoint,
+                    tryAppServiceUrl = _clientConfig.TryAppServiceUrl
                 },
                 functionsVersionInfo = new
                 {
-                    runtimeStable = new[] { "~1", "beta", "latest" },
-                    runtimeDefault = "~1"
+                    runtimeStable = new[] { "~1", "~2" },
+                    runtimeDefault = "~2"
                 }
             });
         }
@@ -83,6 +85,8 @@ namespace AzureFunctions.Code
         public string AzureResourceManagerEndpoint => config();
 
         public string ManagementResource => config();
+
+        public string TryAppServiceUrl => config();
 
         public RuntimeType RuntimeType => (RuntimeType)Enum.Parse(typeof(RuntimeType), config());
     }

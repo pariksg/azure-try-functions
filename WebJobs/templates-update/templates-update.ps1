@@ -34,9 +34,7 @@ function ExecuteTemplatesBuild($buildRoot, $outPath) {
 try {
     $ProgressPreference = "SilentlyContinue"
     $siteTemplates = "$Env:Home\site\wwwroot\App_Data\Templates"
-    $apiUrl = "https://api.github.com/repos/Azure/azure-webjobs-sdk-templates/tags"
-    $repoUrl = "https://github.com/Azure/azure-webjobs-sdk-templates/"
-    $response = Invoke-RestMethod -Uri $apiUrl -Method GET
+    $repoUrl = "https://github.com/Azure/azure-functions-templates/"
 
     if ($Env:FUNCTIONS_SLOT_NAME -eq "next") {
         $branch = "dev"
@@ -54,6 +52,7 @@ try {
     # clone respective branch at the build location, if it is not already present
     $defaultTemplatesBinDirectory = $binDirectory + "default"
     if (!(Test-Path -Path $defaultTemplatesBinDirectory -PathType Container)) {
+        Remove-Item $defaultTemplatesBinDirectory -ItemType Directory
         New-Item $defaultTemplatesBinDirectory -ItemType Directory
         Start-Process git -ArgumentList "clone -b $branch $repoUrl $defaultTemplatesBinDirectory" -NoNewWindow -Wait
     }
@@ -82,29 +81,33 @@ try {
     ExecuteTemplatesBuild $defaultTemplatesBinDirectory $siteDefaultTemplates
 
     # Only get tags for staging environment    
-    foreach ($tag in $response) {                        
-        $siteTemplatesTagDirectory = $siteTemplates + "\" + $tag.name
+    if ($Env:FUNCTIONS_SLOT_NAME -eq "staging") {
+        $apiUrl = "https://api.github.com/repos/Azure/azure-functions-templates/tags"
+        $response = Invoke-RestMethod -Uri $apiUrl -Method GET
+        foreach ($tag in $response) {                        
+            $siteTemplatesTagDirectory = $siteTemplates + "\" + $tag.name
 
-        $tagNumber = 0;
-        # For tags 1 and above run the template build if present
-        if ($tag.name -eq "beta" -or 
-            ($Env:FUNCTIONS_SLOT_NAME -eq "staging" -and 
-            [decimal]::TryParse($tag.name, [ref] $tagNumber) -and 
-            $tagNumber -ge 1)
-        ) {
-            $tagBuildDirectory = $binDirectory + $tag.name
-            if (!(Test-Path -Path $tagBuildDirectory -PathType Container)) {
-                Start-Process git -ArgumentList "clone $repoUrl $tagBuildDirectory" -NoNewWindow -Wait
-            }
+            $tagNumber = 0;
+            # For tags 1 and above run the template build if present
+            if ($tag.name -eq "beta" -or 
+                ($Env:FUNCTIONS_SLOT_NAME -eq "staging" -and 
+                [decimal]::TryParse($tag.name, [ref] $tagNumber) -and 
+                $tagNumber -ge 1)
+            ) {
+                $tagBuildDirectory = $binDirectory + $tag.name
+                if (!(Test-Path -Path $tagBuildDirectory -PathType Container)) {
+                    Start-Process git -ArgumentList "clone $repoUrl $tagBuildDirectory" -NoNewWindow -Wait
+                }
 
-            Set-Location $tagBuildDirectory
-            Start-Process git -ArgumentList "fetch origin" -NoNewWindow -Wait
-            Start-Process git -ArgumentList "fetch origin --tags" -NoNewWindow -Wait
-            $sha = $tag.commit.sha
-            Start-Process git -ArgumentList "reset --hard $sha" -NoNewWindow -Wait                
-            ExecuteTemplatesBuild $tagBuildDirectory $siteTemplatesTagDirectory            
-        }        
-    }   
+                Set-Location $tagBuildDirectory
+                Start-Process git -ArgumentList "fetch origin" -NoNewWindow -Wait
+                Start-Process git -ArgumentList "fetch origin --tags" -NoNewWindow -Wait
+                $sha = $tag.commit.sha
+                Start-Process git -ArgumentList "reset --hard $sha" -NoNewWindow -Wait                
+                ExecuteTemplatesBuild $tagBuildDirectory $siteTemplatesTagDirectory            
+            }        
+        }   
+    }
 }
 catch {    
     Write-Output $_.Exception|format-list -force

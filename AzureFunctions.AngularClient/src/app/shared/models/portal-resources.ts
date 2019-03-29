@@ -1,6 +1,7 @@
 // This file is auto generated
 
-export class PortalResources {
+export class PortalResources
+{
     public static azureFunctions: string = "azureFunctions";
     public static azureFunctionsRuntime: string = "azureFunctionsRuntime";
     public static cancel: string = "cancel";
@@ -19,6 +20,7 @@ export class PortalResources {
     public static functionDev_hostErrorMessage: string = "functionDev_hostErrorMessage";
     public static functionDev_Output: string = "functionDev_Output";
     public static functionDev_requestBody: string = "functionDev_requestBody";
+    public static functionDev_saveAndDownload: string = "functionDev_saveAndDownload";
     public static functionDev_saveAndRun: string = "functionDev_saveAndRun";
     public static functionDev_status: string = "functionDev_status";
     public static functionDev_viewFiles: string = "functionDev_viewFiles";
@@ -904,3 +906,4 @@ export class PortalResources {
     public static DurableFunctionsHttpStart_description: string = "DurableFunctionsHttpStart_description";
     public static functionsPreviewTitle: string = "functionsPreviewTitle";
 }
+

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Response, RequestOptionsArgs, ResponseType } from '@angular/http';
+import { Headers, Response, RequestOptionsArgs, ResponseType, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -73,8 +73,8 @@ export class CacheService {
         return this._armService.send('PATCH', url, content);
     }
 
-    get(url: string, force?: boolean, headers?: Headers, invokeApi?: boolean) {
-        return this.send(url, 'GET', force, headers, null, invokeApi);
+    get(url: string, force?: boolean, headers?: Headers, invokeApi?: boolean, responseContentType?: ResponseContentType) {
+        return this.send(url, 'GET', force, headers, null, invokeApi, responseContentType);
     }
 
     post(url: string, force?: boolean, headers?: Headers, content?: any) {
@@ -127,7 +127,8 @@ export class CacheService {
         force: boolean,
         headers?: Headers,
         content?: any,
-        invokeApi?: boolean) {
+        invokeApi?: boolean,
+        responseContentType?: ResponseContentType) {
 
         const key = url.toLowerCase();
 
@@ -151,7 +152,7 @@ export class CacheService {
                 headers.append('If-None-Match', etag);
             }
 
-            const responseObs = this._armService.send(method, url, content, etag, headers, invokeApi)
+            const responseObs = this._armService.send(method, url, content, etag, headers, invokeApi, responseContentType)
                 .map(response => {
                     return this._mapAndCacheResponse(method, response, key);
                 })
@@ -170,7 +171,7 @@ export class CacheService {
                         return Observable.throw(error);
                     }
                 })
-                .catch(e => this.tryPassThroughController(e, method, url, content, { headers: headers })
+                .catch(e => this.tryPassThroughController(e, method, url, content, { headers: headers, responseType: responseContentType })
                     .map(response => {
                         return this._mapAndCacheResponse(method, response, key);
                     }))

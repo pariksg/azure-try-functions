@@ -39,6 +39,11 @@ export class TryFunctionsService {
         private _userService: UserService,
         private _globalStateService: GlobalStateService) {
 
+        if (window.appsvc.env.tryAppServiceUrl)
+        {
+           this.tryAppServiceUrl = window.appsvc.env.tryAppServiceUrl;
+        }
+
         if (!_globalStateService.showTryView) {
             this._userService.getStartupInfo().subscribe(info => { this.token = info.token });
         }
@@ -66,7 +71,7 @@ export class TryFunctionsService {
             console.error(e);
         }
 
-        let url = `${Constants.serviceHost}api/templates?runtime='latest'`;
+        let url = `${Constants.serviceHost}api/templates?runtime='~2'`;
         return this._http.get(url, { headers: this.getPortalHeaders() })
             .retryWhen(this.retryAntares)
             .map(r => {
@@ -109,6 +114,13 @@ export class TryFunctionsService {
         return this._http.post(url, JSON.stringify(template), { headers: this.getTryAppServiceHeaders() })
             .retryWhen(this.retryCreateTrialResource)
             .map(r => <UIResource>r.json());
+    }
+
+    deleteTrialResource(): Observable<any> {
+        const url = this.tryAppServiceUrl + '/api/resource';
+        return this._http.delete(url, { headers: this.getTryAppServiceHeaders() })
+            .retryWhen(this.retryAntares)
+            .map(r => r.json());
     }
 
     // to talk to Functions Portal

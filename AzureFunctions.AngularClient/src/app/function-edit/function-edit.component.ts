@@ -142,6 +142,8 @@ export class FunctionEditComponent extends NavigableComponent implements OnDestr
     private _setupPollingTasks() {
         if (this._pollingTask) {
             this._pollingTask.unsubscribe();
+        } else {
+            return;
         }
 
         this._pollingTask = Observable.timer(1, 60000)

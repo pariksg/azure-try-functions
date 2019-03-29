@@ -1,7 +1,7 @@
 import { PortalService } from './portal.service';
 import { FunctionAppContext } from 'app/shared/function-app-context';
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
@@ -67,11 +67,11 @@ export class ArmTryService extends ArmService {
         throw new Error('[ArmTryService] - post: ' + resourceId);
     }
 
-    send(method: string, url: string, body?: any, etag?: string, headers?: Headers): Observable<Response> {
+    send(method: string, url: string, body?: any, etag?: string, headers?: Headers, invokeApi?: boolean, responseContentType?: ResponseContentType): Observable<Response> {
         const urlNoQuery = url.toLowerCase().split('?') [0];
 
         if (this._whiteListedPrefixUrls.find(u => urlNoQuery.startsWith(u.toLowerCase()) || urlNoQuery.endsWith('.svg'))) {
-            return super.send(method, url, body, etag, headers);
+            return super.send(method, url, body, etag, headers, invokeApi, responseContentType);
         } else if (urlNoQuery.endsWith(this._tryFunctionAppContext.site.id.toLowerCase())) {
             return Observable.of(this._getFakeResponse(this._tryFunctionAppContext.site));
         } else if (urlNoQuery.endsWith('/providers/microsoft.authorization/permissions')) {

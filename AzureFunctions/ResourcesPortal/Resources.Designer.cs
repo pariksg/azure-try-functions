@@ -3589,6 +3589,15 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save and download app content.
+        /// </summary>
+        internal static string functionDev_saveAndDownload {
+            get {
+                return ResourceManager.GetString("functionDev_saveAndDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save and run.
         /// </summary>
         internal static string functionDev_saveAndRun {

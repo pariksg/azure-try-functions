@@ -146,6 +146,10 @@ export class UrlTemplates {
         return `${this.mainSiteUrl}/admin/host/keys/${keyName}`;
     }
 
+    getDownloadFunctionAppContentUrl(): string {
+        return `${this.scmUrl}/api/functions/admin/download?includeCsproj=false&includeAppSettings=false`;
+    }
+
     get syncTriggersUrl(): string {
         return `${this.scmUrl}/api/functions/synctriggers`;
     }
