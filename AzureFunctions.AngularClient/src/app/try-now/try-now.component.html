@@ -17,14 +17,14 @@
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M0 34.219H34.219V0H0V34.219Z" transform="translate(37.779 37.779)" fill="#FFB900" />
                         </symbol>
                     </defs>
-                </svg><svg aria-hidden="true" role="presentation">
+                </svg><svg aria-hidden="true" role="presentation" style="height:23px; width:162px;">
                     <use xlink:href="#svg-msazure-logo"></use>
                 </svg>
             </a>
         </div>
         <div class="free-trial-wrapper">
             <a [tooltip]="freeAccountTooltip" [attr.href]="freeTrialUri" (click)="trackLinkClick('freeTrialTopClick')" target="_blank" class="signup-button ">
-                {{ 'tryNow_createFreeAzureAccount' | translate }}
+                <span style="white-space:nowrap;">{{ 'tryNow_createFreeAzureAccount' | translate }}</span>
                 <tooltip-content #freeAccountTooltip>
                     <p>
                         {{ 'tryNow_FreeAccountToolTip' | translate }}
@@ -32,7 +32,7 @@
                 </tooltip-content>
             </a>
         </div>
-        <div *ngIf="timerText">{{ 'tryNow_trialTimeRemaining' | translate }} <span id="timer-text">{{timerText}}</span></div>
+        <div *ngIf="timerText" style="white-space:nowrap;">{{ 'tryNow_trialTimeRemaining' | translate }} <span id="timer-text">{{timerText}}</span></div>
         <span class="discover-more-wrapper">
             <a [attr.href]="discoverMoreUri" (click)="trackLinkClick('discoverMoreClick')" target="_blank" class="discover-more-button">
                 {{ 'tryNow_discoverMore' | translate }}

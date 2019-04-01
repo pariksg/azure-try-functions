@@ -49,8 +49,7 @@
 }
 
 .sidenav-try{
-    height: calc(100% - $top-bar-height);
-    top: $top-bar-height;
+    height: calc(100% - #{$top-bar-height});
 }
 
 #sidenav-menu{
