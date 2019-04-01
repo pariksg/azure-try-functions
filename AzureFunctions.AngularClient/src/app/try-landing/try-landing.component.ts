@@ -87,7 +87,6 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         this._tryFunctionsService.createTrialResource(selectedTemplate,
                             this._tryFunctionsService.selectedProvider, this._tryFunctionsService.selectedFunctionName)
                             .subscribe((resource) => {
-                                this.clearBusyState();
                                 this.createFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                             },
                             error => {
@@ -123,6 +122,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         };
 
         this.functionsInfo.push(result);
+        this.clearBusyState();
     }
 
     ngOnDestroy() {
@@ -160,7 +160,6 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         // get trial account
                         this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
                             .subscribe((resource) => {
-                                this.clearBusyState();
                                 this.createFunctioninResource(resource, selectedTemplate, functionName);
                             }, (error: Response) => {
                                 if (error.status === 401 || error.status === 403) {
@@ -176,7 +175,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                 } else if (error.status === 400) {
                                     this._tryFunctionsService.getTrialResource(provider)
                                         .subscribe((resource) => {
-                                            this.createFunctioninResource(resource, selectedTemplate, functionName);
+                                            this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                         }
                                         );
                                 } else {
@@ -242,11 +241,9 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this._functionAppService.setTryFunctionsToken(encryptedCreds);
 
         this._userService.setTryUserName(resource.userName);
-        this.setBusyState();
 
         this._functionAppService.createFunctionV2(this.context, functionName, selectedTemplate.files, selectedTemplate.function)
             .subscribe(res => {
-                this.clearBusyState();
                 if (res.isSuccessful) {
                     this._aiService.trackEvent('new-function', { template: selectedTemplate.id, result: 'success', first: 'true' });
                     this._broadcastService.broadcast(BroadcastEvent.FunctionAdded, res);
@@ -303,10 +300,8 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this._functionAppService.setTryFunctionsToken(encryptedCreds);
 
         this._userService.setTryUserName(resource.userName);
-        this.setBusyState();
         const navId = this.context.site.id.slice(1, this.context.site.id.length).toLowerCase().replace('/providers/microsoft.web', '');
         this._router.navigate([`/resources/${navId}}/functions/${functionName}`], { queryParams: Url.getQueryStringObj() });
-        this.clearBusyState();
     }
 
     setBusyState() {
