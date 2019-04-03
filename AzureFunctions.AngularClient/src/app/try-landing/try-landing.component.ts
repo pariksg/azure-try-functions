@@ -152,6 +152,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
             } else
                 if (selectedTemplate) {
                     try {
+                        this._aiService.trackEvent('try-now-clicked', { template: selectedTemplate.id });
                         const functionName = BindingManager.getFunctionName(selectedTemplate.metadata.defaultFunctionName, this.functionsInfo);
                         this.bc.setDefaultValues(selectedTemplate.function.bindings, this._globalStateService.DefaultStorageAccount);
 
@@ -160,6 +161,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         // get trial account
                         this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
                             .subscribe((resource) => {
+                                this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
                                 this.createFunctioninResource(resource, selectedTemplate, functionName);
                             }, (error: Response) => {
                                 if (error.status === 401 || error.status === 403) {
@@ -299,6 +301,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this._tryFunctionsService.functionAppContext = this.context;
         this._functionAppService.setTryFunctionsToken(encryptedCreds);
 
+        this._aiService.trackEvent('navigate-to-existing-function', { template: selectedTemplate.id, result: 'success', first: 'false' });
         this._userService.setTryUserName(resource.userName);
         const navId = this.context.site.id.slice(1, this.context.site.id.length).toLowerCase().replace('/providers/microsoft.web', '');
         this._router.navigate([`/resources/${navId}}/functions/${functionName}`], { queryParams: Url.getQueryStringObj() });

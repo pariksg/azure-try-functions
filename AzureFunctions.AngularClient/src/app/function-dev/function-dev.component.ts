@@ -25,6 +25,7 @@ import { FileExplorerComponent } from '../file-explorer/file-explorer.component'
 import { GlobalStateService } from '../shared/services/global-state.service';
 import { BusyStateComponent } from '../busy-state/busy-state.component';
 import { PortalResources } from '../shared/models/portal-resources';
+import { AiService } from '../shared/services/ai.service';
 import { TutorialEvent, TutorialStep } from '../shared/models/tutorial';
 import { MonacoEditorDirective } from '../shared/directives/monaco-editor.directive';
 import { BindingManager } from '../shared/models/binding-manager';
@@ -102,6 +103,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         private _portalService: PortalService,
         private _globalStateService: GlobalStateService,
         private _translateService: TranslateService,
+        private _aiService: AiService,
         private _tryFunctionsService: TryFunctionsService,
         private _functionAppService: FunctionAppService,
         private _router: Router,
@@ -411,7 +413,11 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         }
     }
 
-    saveScript(dontClearBusy?: boolean): Subscription | null {
+    saveScript(dontClearBusy?: boolean, dontTrack?: boolean): Subscription | null {
+        if (!dontTrack) {
+            this._aiService.trackEvent('save-function', { isDirty: this.scriptFile.isDirty.toString()});
+        }
+
         // Only save if the file is dirty
         if (!this.scriptFile.isDirty) {
             return null;
@@ -461,9 +467,13 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
             });
     }
 
-    downloadFunctionAppContent() {
+    downloadFunctionAppContent(dontTrack?: boolean) {
         this._globalStateService.setBusyState();
-        this.saveScript();
+        if (!dontTrack) {
+            this._aiService.trackEvent('download-function', { isDirty: this.scriptFile.isDirty.toString() });
+        }
+
+        this.saveScript(false, true);
         this._functionAppService.getAppContentAsZip(this.context).subscribe(
             data => {
                 if (data.isSuccessful) {
@@ -476,8 +486,9 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
     }
 
     deleteFunctionApp() {
-        this.downloadFunctionAppContent();
         this._globalStateService.setBusyState();
+        this._aiService.trackEvent('delete-function', { isDirty: this.scriptFile.isDirty.toString() });
+        this.downloadFunctionAppContent(true);
         this._tryFunctionsService.deleteTrialResource().subscribe(
             () => {
                 this._globalStateService.TrialExpired = true;
@@ -522,6 +533,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
     }
 
     runFunction() {
+        this._aiService.trackEvent('run-function', { runValid: this.runValid.toString() });
         if (!this.runValid) {
             return;
         }
@@ -565,6 +577,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
     }
 
     cancelCurrentRun() {
+        this._aiService.trackEvent('cancel-run-function', { runValid: this.runValid.toString() });
         this._globalStateService.clearBusyState();
         if (this.running) {
             this.running.unsubscribe();
@@ -605,6 +618,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
     }
 
     setShowFunctionInvokeUrlModal(value: boolean) {
+        this._aiService.trackEvent('get-function-url', { value: value.toString() });
         const allKeys = this.functionKeys.keys.concat(this.hostKeys.keys);
         if (allKeys.length > 0) {
             this.onChangeKey(allKeys[0].value);
@@ -689,7 +703,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
     private runFunctionInternal() {
 
         if (this.scriptFile.isDirty) {
-            this.saveScript().add(() => setTimeout(() => this.runFunction(), 1000));
+            this.saveScript(false, true).add(() => setTimeout(() => this.runFunction(), 1000));
         } else {
             const result = (this.runHttp)
                 ? this._functionAppService.runHttpFunction(this.context, this.functionInfo, this.functionInvokeUrl, this.runHttp.model)

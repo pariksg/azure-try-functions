@@ -78,7 +78,7 @@ export class TryNowComponent implements OnInit {
     trackLinkClick(buttonName: string) {
         if (buttonName) {
             try {
-                this._aiService.trackLinkClick(buttonName, this._globalStateService.TrialExpired.toString());
+                this._aiService.trackLinkClick(buttonName, this._globalStateService.TrialExpired.toString(), this.timerText);
             } catch (error) {
                 this._aiService.trackException(error, 'trackLinkClick');
             }
