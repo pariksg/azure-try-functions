@@ -2855,6 +2855,6 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
     <value>Sign up for an Azure free trial to get the full Azure Functions experience.</value>
   </data>
   <data name="tryNow" xml:space="preserve">
-    <value>Try Azure Functions now</value>
+    <value>Create a sample function app</value>
   </data>
 </root>

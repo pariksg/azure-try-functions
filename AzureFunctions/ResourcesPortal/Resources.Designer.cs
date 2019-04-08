@@ -7786,7 +7786,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try Azure Functions now.
+        ///   Looks up a localized string similar to Create a sample function app.
         /// </summary>
         internal static string tryNow {
             get {
