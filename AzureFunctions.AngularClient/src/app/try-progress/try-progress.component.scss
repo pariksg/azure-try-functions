@@ -1,0 +1,52 @@
+.footer {
+    width: 100%;
+    min-width: 1024px;
+    height: 130px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: white;
+    background-color: black;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: "Segoe UI", SegoeUI, "Segoe WP", Tahoma, Arial, sans-serif;
+    position: absolute;
+}
+
+.medium-10 {
+    width: 100%;
+}
+
+.column {
+    float: left;
+}
+
+.medium-3 {
+    width: 25%;
+}
+
+.step-container {
+    position: relative;
+    text-align: center;
+}
+
+.step {
+    border-radius: 50%;
+    background-color: white;
+    height: 48px;
+    width: 48px;
+    margin: 5%;
+    margin-left: calc(50% - 24px);
+    margin-bottom: 1%;
+}
+
+.step-text {
+    color: black;
+    font-size: 30px;
+}
+
+.p {
+    margin-left: 5%;
+    margin-right: 5%;
+}

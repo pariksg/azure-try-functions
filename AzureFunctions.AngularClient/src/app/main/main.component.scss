@@ -6,7 +6,8 @@
     height: calc(100% - #{$top-bar-height});
 
     #dashboard {
-        height: 100%;
+        height: calc(100% - 130px);
+        bottom: 130px;
         padding-left: $sidenav-width;
         background-color: $body-bg-color;
     }

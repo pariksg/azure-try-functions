@@ -64,6 +64,7 @@ import { DeletedItemsFilter } from './../controls/table-root/deleted-items-filte
 import { ActivateWithKeysDirective } from './../controls/activate-with-keys/activate-with-keys.directive';
 import { EmbeddedService } from 'app/shared/services/embedded.service';
 import { SiteService } from 'app/shared/services/site.service';
+import { TryProgressComponent } from 'app/try-progress/try-progress.component';
 
 export function ArmServiceFactory(
     http: Http,
@@ -90,6 +91,7 @@ export function AiServiceFactory() {
     declarations: [
         TopBarComponent,
         TryNowComponent,
+        TryProgressComponent,
         TopBarStandAloneLoginUserComponent,
         TryNowBusyStateComponent,
         BusyStateComponent,
@@ -129,6 +131,7 @@ export function AiServiceFactory() {
         MultiDropDownComponent,
         TopBarComponent,
         TryNowComponent,
+        TryProgressComponent,
         TopBarStandAloneLoginUserComponent,
         TryNowBusyStateComponent,
         BusyStateComponent,

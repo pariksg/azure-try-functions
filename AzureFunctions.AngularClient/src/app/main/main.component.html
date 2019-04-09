@@ -1,6 +1,5 @@
 <top-bar *ngIf="ready"></top-bar>
 <busy-state name='dashboard' cssClass="busy-dashboard"></busy-state>
-
 <div class = "content" [class.content-standalone]="showTopBar">
 
     <side-nav *ngIf="ready"></side-nav>
@@ -9,4 +8,5 @@
     <div id="dashboard" [hidden]="!ready">
         <router-outlet></router-outlet>
     </div>
+    <try-progress></try-progress>
 </div>

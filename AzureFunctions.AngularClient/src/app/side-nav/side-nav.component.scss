@@ -2,7 +2,7 @@
 
 .sidenav {
     width: $sidenav-width;
-    height: 100%;
+    height: calc(100% - 130px);
     position: fixed;
     top: 0;
     left: 0;
