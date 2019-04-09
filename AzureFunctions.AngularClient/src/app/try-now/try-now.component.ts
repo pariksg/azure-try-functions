@@ -75,6 +75,11 @@ export class TryNowComponent implements OnInit {
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
 
+    launchFreeTrialPortal() {
+        this._globalStateService.tryProgress = 6;
+        this.trackLinkClick('freeTrialTopClick');
+    }
+
     trackLinkClick(buttonName: string) {
         if (buttonName) {
             try {

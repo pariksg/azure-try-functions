@@ -497,6 +497,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
                 Cookie.delete('functionName');
                 Cookie.delete('provider');
                 Cookie.delete('templateId');
+                this._broadcastService.broadcast(BroadcastEvent.TrialExpired);
                 this._router.navigate([`/try`], { queryParams: { trial: true } } );
                 this._globalStateService.clearBusyState();
             },
@@ -506,6 +507,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         }
 
     contentChanged(content: string) {
+        this._globalStateService.tryProgress = 4;
         if (!this.scriptFile.isDirty) {
             this.scriptFile.isDirty = true;
             this._broadcastService.setDirtyState('function');
@@ -534,6 +536,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
 
     runFunction() {
         this._aiService.trackEvent('run-function', { runValid: this.runValid.toString() });
+        this._globalStateService.tryProgress = this._globalStateService.tryProgress > 2 ? this._globalStateService.tryProgress : 2;
         if (!this.runValid) {
             return;
         }
@@ -711,6 +714,12 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
 
             this.running = result
                 .switchMap(r => {
+                    if (r.result.statusCode >= 400) {
+                        this._globalStateService.tryProgress = this._globalStateService.tryProgress >= 4 ? 4 : 2;
+                    } else {
+                        this._globalStateService.tryProgress = this._globalStateService.tryProgress > 5 ? this._globalStateService.tryProgress : (this._globalStateService.tryProgress <= 3 ? 3 : 5);
+                    }
+
                     return r.result.statusCode >= 400
                         ? this._functionAppService.getFunctionErrors(this.context, this.functionInfo).map(_ => r)
                         : Observable.of(r);
@@ -719,7 +728,6 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
                     this.runResult = r.result;
                     this._globalStateService.clearBusyState();
                     delete this.running;
-
                 }, () => this._globalStateService.clearBusyState());
         }
     }

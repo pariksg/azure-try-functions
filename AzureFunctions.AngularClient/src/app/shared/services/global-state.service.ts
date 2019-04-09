@@ -19,6 +19,7 @@ export class GlobalStateService {
     public enabledApiProxy: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public topBarNotificationsStream = new ReplaySubject<TopBarNotification[]>(1);
     public disabledMessage = new Subject<string>();
+    public tryProgress = 0;
 
     private _functionContainer: FunctionContainer;
     private _appSettings: { [key: string]: string };
