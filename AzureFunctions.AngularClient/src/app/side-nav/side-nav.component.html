@@ -39,6 +39,36 @@
          role="tree"
          [attr.aria-label]="'functionApps' | translate">
         <tree-view *ngIf="rootNode" [node]="rootNode" [level]="0"></tree-view>
+
+        <div id="commands" class="commands-container">
+            <div class="free-trial-wrapper">
+                <a [tooltip]="freeAccountTooltip" [attr.href]="freeTrialUri" (click)="launchFreeTrialPortal()" target="_blank" class="signup-button">
+                    <button class="custom-button-invert">{{ 'tryNow_createFreeAzureAccount' | translate }}</button>
+                    <tooltip-content #freeAccountTooltip>
+                        <p>
+                            {{ 'tryNow_FreeAccountToolTip' | translate }}
+                        </p>
+                    </tooltip-content>
+                </a>
+            </div>
+            <span class="discover-more-wrapper">
+                <a [attr.href]="discoverMoreUri" (click)="trackLinkClick('discoverMoreClick')" target="_blank" class="discover-more-button">
+                    <button class="custom-button-invert">{{ 'tryNow_discoverMore' | translate }}</button>
+                </a>
+            </span>
+
+                <button 
+                        class="custom-button-invert"
+                        (click)="downloadFunctionAppContent()">
+                        <i class="fa fa-download"></i>
+                        {{ 'downloadFunctionAppContent' | translate }}
+                </button>
+              <button class="custom-button-invert"
+                      (click)="deleteFunctionApp()">
+                      <i class="fa fa-minus-circle"></i>
+                      {{ '_delete' | translate }}
+                    </button>
+        </div>
     </div>
 
 </div>

@@ -40,6 +40,8 @@ import { Subscription } from '../shared/models/subscription';
 import { SlotsService } from './../shared/services/slots.service';
 import { Url } from 'app/shared/Utilities/url';
 import { StartupInfo } from 'app/shared/models/portal';
+import { FileUtilities } from "app/shared/Utilities/file";
+import { Cookie } from "ng2-cookies/ng2-cookies";
 
 @Component({
     selector: 'side-nav',
@@ -67,6 +69,9 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
 
     public selectedNode: TreeNode;
     public selectedDashboardType: DashboardType;
+
+    public freeTrialUri: string;
+    public discoverMoreUri: string;
 
     private _subscriptionsStream = new ReplaySubject<Subscription[]>(1);
     private _searchTermStream = new ReplaySubject<string>(1);
@@ -104,6 +109,9 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
         public route: ActivatedRoute,
         private _functionAppService: FunctionAppService,
         private _scenarioService: ScenarioService) {
+
+        this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
+        this.discoverMoreUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/services/functions/`;
 
         this.headerOnTopOfSideNav = this._scenarioService.checkScenario(ScenarioIds.headerOnTopOfSideNav).status === 'enabled';
         this.noPaddingOnSideNav = this._scenarioService.checkScenario(ScenarioIds.noPaddingOnSideNav).status === 'enabled';
@@ -487,5 +495,64 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
                 };
             })
             .sort((a, b) => a.displayLabel.localeCompare(b.displayLabel));
+    }
+
+    launchFreeTrialPortal() {
+        this.globalStateService.tryProgress = 6;
+        this.trackLinkClick("freeTrialTopClick");
+    }
+
+    trackLinkClick(buttonName: string) {
+        if (buttonName) {
+            try {
+                this.aiService.trackLinkClick(
+                    buttonName,
+                    this.globalStateService.TrialExpired.toString()
+                );
+            } catch (error) {
+                this.aiService.trackException(error, "trackLinkClick");
+            }
+        }
+    }
+
+    downloadFunctionAppContent() {
+        this.globalStateService.setBusyState();
+        this.aiService.trackEvent("download-function");
+
+        this._functionAppService
+            .getAppContentAsZip(this._tryFunctionAppContext)
+            .subscribe(
+            data => {
+                if (data.isSuccessful) {
+                    FileUtilities.saveFile(
+                        data.result,
+                        `${this._tryFunctionAppContext.site.name}.zip`
+                    );
+                }
+                this.globalStateService.clearBusyState();
+            },
+            () => this.globalStateService.clearBusyState()
+            );
+    }
+
+    deleteFunctionApp() {
+        this.globalStateService.setBusyState();
+        this.aiService.trackEvent("delete-function");
+        this.tryFunctionsSevice.deleteTrialResource().subscribe(
+            () => {
+                this.globalStateService.TrialExpired = true;
+                this.globalStateService.TryAppServiceToken = null;
+                Cookie.delete("TryAppServiceToken");
+                Cookie.delete("functionName");
+                Cookie.delete("provider");
+                Cookie.delete("templateId");
+                this.broadcastService.broadcast(BroadcastEvent.TrialExpired);
+                this.router.navigate([`/try`], { queryParams: { trial: true } });
+                this.globalStateService.clearBusyState();
+            },
+            error => {
+                this.globalStateService.clearBusyState();
+            }
+        );
     }
 }

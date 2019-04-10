@@ -19,7 +19,7 @@ export class TrialExpiredComponent implements OnInit {
     trackLinkClick(buttonName: string) {
         if (buttonName) {
             try {
-                this._aiService.trackLinkClick(buttonName, 'true', '0');
+                this._aiService.trackLinkClick(buttonName, 'true');
             } catch (error) {
                 this._aiService.trackException(error, 'trackLinkClick');
             }
