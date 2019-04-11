@@ -22,7 +22,7 @@ import { PortalService } from '../shared/services/portal.service';
 import { BindingType } from '../shared/models/binding';
 import { RunFunctionResult } from '../shared/models/run-function-result';
 import { FileExplorerComponent } from '../file-explorer/file-explorer.component';
-import { GlobalStateService } from '../shared/services/global-state.service';
+import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
 import { BusyStateComponent } from '../busy-state/busy-state.component';
 import { PortalResources } from '../shared/models/portal-resources';
 import { AiService } from '../shared/services/ai.service';
@@ -502,7 +502,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         }
 
     contentChanged(content: string) {
-        this._globalStateService.tryProgress = 4;
+        this._globalStateService.tryProgress = TryProgress.EditAndTestInProgress;
         if (!this.scriptFile.isDirty) {
             this.scriptFile.isDirty = true;
             this._broadcastService.setDirtyState('function');
@@ -531,7 +531,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
 
     runFunction() {
         this._aiService.trackEvent('run-function', { runValid: this.runValid.toString() });
-        this._globalStateService.tryProgress = this._globalStateService.tryProgress > 2 ? this._globalStateService.tryProgress : 2;
+        this._globalStateService.tryProgress = this._globalStateService.tryProgress > TryProgress.FirstTestInProgress ? this._globalStateService.tryProgress : TryProgress.FirstTestInProgress;
         if (!this.runValid) {
             return;
         }
@@ -710,9 +710,9 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
             this.running = result
                 .switchMap(r => {
                     if (r.result.statusCode >= 400) {
-                        this._globalStateService.tryProgress = this._globalStateService.tryProgress >= 4 ? 4 : 2;
+                        this._globalStateService.tryProgress = this._globalStateService.tryProgress >= TryProgress.EditAndTestInProgress ? TryProgress.EditAndTestInProgress : TryProgress.FirstTestInProgress;
                     } else {
-                        this._globalStateService.tryProgress = this._globalStateService.tryProgress > 5 ? this._globalStateService.tryProgress : (this._globalStateService.tryProgress <= 3 ? 3 : 5);
+                        this._globalStateService.tryProgress = this._globalStateService.tryProgress > TryProgress.EditAndTestSuccess ? this._globalStateService.tryProgress : (this._globalStateService.tryProgress <= TryProgress.FirstTestSuccess ? TryProgress.FirstTestSuccess : TryProgress.EditAndTestSuccess);
                     }
 
                     return r.result.statusCode >= 400

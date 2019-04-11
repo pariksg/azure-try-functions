@@ -2,7 +2,7 @@
     <div class="column medium-10">
         <div class="column medium-3">
             <div class="step-container">
-                <div [ngClass]="_globalStateService.tryProgress >= 1 ? 'step done' : 'step not-started'">
+                <div [ngClass]="state() >= TryProgress.ResourceCreated ? 'step done' : 'step not-started'">
                     <div class="step-text">1</div>
                 </div>
                 <p>Create a function app and your first function</p>
@@ -11,7 +11,7 @@
 
         <div class="column medium-3">
             <div class="step-container">
-                <div [ngClass]="_globalStateService.tryProgress === 2 ? 'step in-progress' : (_globalStateService.tryProgress >= 3 ? 'step done' : 'step not-started')">
+                <div [ngClass]="state() === TryProgress.FirstTestInProgress ? 'step in-progress' : (state() >= TryProgress.FirstTestSuccess ? 'step done' : 'step not-started')">
                     <div class="step-text">2</div>
                 </div>
                 <p>Test out your function to see that it's working</p>
@@ -20,7 +20,7 @@
 
         <div class="column medium-3 end">
             <div class="step-container">
-                <div [ngClass]="_globalStateService.tryProgress === 4 ? 'step in-progress' : (_globalStateService.tryProgress >= 5 ? 'step done' : 'step not-started')">
+                <div [ngClass]="state() === TryProgress.EditAndTestInProgress ? 'step in-progress' : (state() >= TryProgress.EditAndTestSuccess ? 'step done' : 'step not-started')">
                     <div class="step-text">3</div>
                 </div>
                 <p>Edit your code and test out your changes</p>
@@ -29,7 +29,7 @@
 
         <div class="column medium-3 end">
             <div class="step-container">
-                <div [ngClass]="_globalStateService.tryProgress >= 6 ? 'step in-progress' : 'step not-started'">
+                <div [ngClass]="state() >= TryProgress.FreeTrialClicked ? 'step in-progress' : 'step not-started'">
                     <div class="step-text">4</div>
                 </div>
                 <p>Create an Azure free trial to experience all of Azure Functions</p>

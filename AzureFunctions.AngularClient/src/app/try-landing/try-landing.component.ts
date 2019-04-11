@@ -16,7 +16,7 @@ import { BroadcastEvent } from '../shared/models/broadcast-event';
 import { FunctionTemplate } from '../shared/models/function-template';
 import { FunctionInfo } from '../shared/models/function-info';
 import { BindingManager } from '../shared/models/binding-manager';
-import { GlobalStateService } from '../shared/services/global-state.service';
+import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
 import { UIResource } from '../shared/models/ui-resource';
 import { BusyStateComponent } from '../busy-state/busy-state.component';
 import { PortalResources } from '../shared/models/portal-resources';
@@ -118,7 +118,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                             this._tryFunctionsService.selectedProvider, this._tryFunctionsService.selectedFunctionName)
                             .subscribe((resource) => {
                                 this.createFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
-                                this._globalStateService.tryProgress = 1;
+                                this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                             },
                             error => {
                                 if (error.status === 400) {
@@ -126,7 +126,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                     // we'll get a HTTP 400 ..so lets get it.
                                     this._tryFunctionsService.getTrialResource(this._tryFunctionsService.selectedProvider)
                                         .subscribe((resource) => {
-                                            this._globalStateService.tryProgress = 1;
+                                            this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                                             this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                         });
                                 } else {
@@ -203,7 +203,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                             .subscribe((resource) => {
                                 this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
                                 this.createFunctioninResource(resource, selectedTemplate, functionName);
-                                this._globalStateService.tryProgress = 1;
+                                this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                             }, (error: Response) => {
                                 if (error.status === 401 || error.status === 403) {
                                     // show login options
@@ -218,7 +218,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                 } else if (error.status === 400) {
                                     this._tryFunctionsService.getTrialResource(provider)
                                         .subscribe((resource) => {
-                                            this._globalStateService.tryProgress = 1;
+                                            this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                                             this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                         }
                                         );

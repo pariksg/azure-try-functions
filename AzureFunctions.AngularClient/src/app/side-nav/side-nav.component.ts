@@ -30,7 +30,7 @@ import { ArmService } from '../shared/services/arm.service';
 import { CacheService } from '../shared/services/cache.service';
 import { UserService } from '../shared/services/user.service';
 import { TryFunctionsService } from '../shared/services/try-functions.service';
-import { GlobalStateService } from '../shared/services/global-state.service';
+import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
 import { BroadcastService } from '../shared/services/broadcast.service';
 import { AiService } from '../shared/services/ai.service';
 import { DropDownElement } from '../shared/models/drop-down-element';
@@ -498,7 +498,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
     }
 
     launchFreeTrialPortal() {
-        this.globalStateService.tryProgress = 6;
+        this.globalStateService.tryProgress = TryProgress.FreeTrialClicked;
         this.trackLinkClick("freeTrialTopClick");
     }
 
@@ -537,7 +537,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
 
     deleteFunctionApp() {
         this.globalStateService.setBusyState();
-        this.globalStateService.tryProgress = 0;
+        this.globalStateService.tryProgress = TryProgress.NotStarted;
         this.aiService.trackEvent("delete-function");
         this.tryFunctionsSevice.deleteTrialResource().subscribe(
             () => {
