@@ -41,7 +41,6 @@ import { SlotsService } from './../shared/services/slots.service';
 import { Url } from 'app/shared/Utilities/url';
 import { StartupInfo } from 'app/shared/models/portal';
 import { FileUtilities } from "app/shared/Utilities/file";
-import { Cookie } from "ng2-cookies/ng2-cookies";
 
 @Component({
     selector: 'side-nav',
@@ -72,6 +71,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
 
     public freeTrialUri: string;
     public discoverMoreUri: string;
+    public showTryRestartModal = false;
 
     private _subscriptionsStream = new ReplaySubject<Subscription[]>(1);
     private _searchTermStream = new ReplaySubject<string>(1);
@@ -535,6 +535,14 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
             );
     }
 
+    showRestartModal() {
+        this.showTryRestartModal = true;
+    }
+
+    hideModal() {
+        this.showTryRestartModal = false;
+    }
+
     deleteFunctionApp() {
         this.globalStateService.setBusyState();
         this.globalStateService.tryProgress = TryProgress.NotStarted;
@@ -542,12 +550,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
         this.tryFunctionsSevice.deleteTrialResource().subscribe(
             () => {
                 this.globalStateService.TrialExpired = true;
-                this.globalStateService.TryAppServiceToken = null;
-                Cookie.delete("TryAppServiceToken");
-                Cookie.delete("functionName");
-                Cookie.delete("provider");
-                Cookie.delete("templateId");
-                Cookie.deleteAll();
+                this.tryFunctionsSevice.clearToken();
                 this.broadcastService.broadcast(BroadcastEvent.TrialExpired);
                 this.router.navigate([`/try`], { queryParams: { trial: true } });
                 this.globalStateService.clearBusyState();
