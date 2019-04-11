@@ -3,6 +3,7 @@ import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { RecaptchaModule, RecaptchaLoaderService } from "ng-recaptcha";
 
 const routing: ModuleWithProviders = RouterModule.forChild([
     { path: '', component: TryLandingComponent }
@@ -12,11 +13,12 @@ const routing: ModuleWithProviders = RouterModule.forChild([
     imports: [
         TranslateModule.forChild(),
         SharedModule,
-        routing
+        routing,
+        RecaptchaModule
     ],
     declarations: [
         TryLandingComponent
     ],
-    providers: []
+    providers: [RecaptchaLoaderService]
 })
 export class TryLandingModule { }

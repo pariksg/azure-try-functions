@@ -20,7 +20,8 @@ namespace AzureFunctions.Code
             {
                 RuntimeType = this.RuntimeType.ToString(),
                 AzureResourceManagerEndpoint = this.AzureResourceManagerEndpoint,
-                TryAppServiceUrl = this.TryAppServiceUrl
+                TryAppServiceUrl = this.TryAppServiceUrl,
+                reCAPTCHASiteKey = this.ReCaptchaSiteKey
             };
         }
 
@@ -59,7 +60,8 @@ namespace AzureFunctions.Code
                     hostName = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME"),
                     runtimeType = _clientConfig.RuntimeType,
                     azureResourceManagerEndpoint = _clientConfig.AzureResourceManagerEndpoint,
-                    tryAppServiceUrl = _clientConfig.TryAppServiceUrl
+                    tryAppServiceUrl = _clientConfig.TryAppServiceUrl,
+                    reCAPTCHASiteKey = _clientConfig.reCAPTCHASiteKey
                 },
                 functionsVersionInfo = new
                 {
@@ -87,6 +89,8 @@ namespace AzureFunctions.Code
         public string ManagementResource => config();
 
         public string TryAppServiceUrl => config();
+
+        public string ReCaptchaSiteKey => config();
 
         public RuntimeType RuntimeType => (RuntimeType)Enum.Parse(typeof(RuntimeType), config());
     }

@@ -12,5 +12,8 @@ namespace AzureFunctions.Models
 
         [JsonProperty(PropertyName = "TryAppServiceUrl")]
         public string TryAppServiceUrl { get; set; }
+
+        [JsonProperty(PropertyName = "reCAPTCHASiteKey")]
+        public string reCAPTCHASiteKey { get; set; }
     }
 }

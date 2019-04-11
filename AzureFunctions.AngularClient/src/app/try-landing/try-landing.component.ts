@@ -35,6 +35,9 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
     @ViewChild(BusyStateComponent) busyState: BusyStateComponent;
     public functionsInfo: FunctionInfo[] = new Array();
     bc: BindingManager = new BindingManager();
+    reCAPTCHASiteKey: string;
+    disableTry = true;
+    captchaCode: string;
     loginOptions = false;
     selectedFunction: string;
     selectedLanguage: string;
@@ -59,6 +62,17 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this._armTryService = _armService as ArmTryService;
     }
 
+    public resolved(captchaResponse: string) {
+        if (captchaResponse === null) {
+        this.disableTry = true;
+        this._tryFunctionsService.clearToken();
+      } else {
+        this.captchaCode = captchaResponse;
+        this.disableTry = false;
+        console.log(`Resolved captcha with response ${captchaResponse}:`);
+      }
+    }
+
     ngOnInit() {
         // Disabling this temporarily. Somehow ngOnInit gets called twice on refresh
         // possibly related to https://github.com/angular/angular/issues/6782
@@ -68,6 +82,11 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this.selectedLanguage = this._tryFunctionsService.selectedLanguage || 'JavaScript';
 
         this._globalStateService.setBusyState();
+        if (!this._globalStateService.TryAppServiceToken) {
+          this.disableTry = true;
+          this.captchaCode = null;
+          this._tryFunctionsService.clearToken();
+        }
 
         this._userService.getStartupInfo()
             .takeUntil(this._ngUnsubscribe)
@@ -76,6 +95,17 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
             })
             .subscribe(templates => {
                 this._globalStateService.clearBusyState();
+                if (window.location.hostname === 'localhost' && !window.appsvc.env.reCAPTCHASiteKey) {
+                  // default to tryAppService hostest reCaptcha redirection
+                  this.reCAPTCHASiteKey = null;
+                  this.disableTry = false;
+                } else if (window.appsvc.env.reCAPTCHASiteKey) {
+                  this.reCAPTCHASiteKey = window.appsvc.env.reCAPTCHASiteKey;
+                } else {
+                  // default to tryAppService hosted reCaptcha redirection
+                  this.reCAPTCHASiteKey = null;
+                  this.disableTry = false;
+                }
 
                 if (this._globalStateService.TryAppServiceToken) {
                     const selectedTemplate: FunctionTemplate = templates.find((t) => {
@@ -100,7 +130,10 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                             this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                         });
                                 } else {
-                                    this.clearBusyState();
+                                  this.disableTry = true;
+                                  this.captchaCode = null;
+                                  this._tryFunctionsService.clearToken();
+                                  this.clearBusyState();
                                 }
                             });
                     }
@@ -161,6 +194,11 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         this.setBusyState();
                         // login
                         // get trial account
+                        if (this.captchaCode) {
+                          this._tryFunctionsService.setCookie(this.captchaCode, selectedTemplate.id, provider, functionName);
+                          this._tryFunctionsService.initializeToken();
+                        }
+
                         this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
                             .subscribe((resource) => {
                                 this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
@@ -185,7 +223,10 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                         }
                                         );
                                 } else {
-                                    this.showComponentError({
+                                  this.disableTry = true;
+                                  this.captchaCode = null;
+                                  this._tryFunctionsService.clearToken();
+                                  this.showComponentError({
                                         message: `${this._translateService.instant(PortalResources.tryLanding_functionError)}`,
                                         details: `${this._translateService.instant(PortalResources.tryLanding_functionErrorDetails)}: ${JSON.stringify(error)}`,
                                         errorId: errorIds.tryAppServiceError,

@@ -537,6 +537,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
 
     deleteFunctionApp() {
         this.globalStateService.setBusyState();
+        this.globalStateService.tryProgress = 0;
         this.aiService.trackEvent("delete-function");
         this.tryFunctionsSevice.deleteTrialResource().subscribe(
             () => {
@@ -546,6 +547,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
                 Cookie.delete("functionName");
                 Cookie.delete("provider");
                 Cookie.delete("templateId");
+                Cookie.deleteAll();
                 this.broadcastService.broadcast(BroadcastEvent.TrialExpired);
                 this.router.navigate([`/try`], { queryParams: { trial: true } });
                 this.globalStateService.clearBusyState();

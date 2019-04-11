@@ -48,6 +48,10 @@ export class TryFunctionsService {
             this._userService.getStartupInfo().subscribe(info => { this.token = info.token });
         }
 
+        this.initializeToken();
+    }
+
+    initializeToken() {
         if (Cookie.get('TryAppServiceToken')) {
             this._globalStateService.TryAppServiceToken = Cookie.get('TryAppServiceToken');
             const templateId = Cookie.get('templateId');
@@ -56,6 +60,22 @@ export class TryFunctionsService {
             this.selectedProvider = Cookie.get('provider');
             this.selectedFunctionName = Cookie.get('functionName');
         }
+    }
+
+    clearToken() {
+        Cookie.delete("TryAppServiceToken");
+        Cookie.delete("templateId");
+        Cookie.delete("provider");
+        Cookie.delete("functionName");
+        Cookie.deleteAll();
+        this._globalStateService.TryAppServiceToken = null;
+    }
+
+    setCookie(token: string, template: string, provider: string, functionName: string) {
+        Cookie.set("TryAppServiceToken", token, 60);
+        Cookie.set("templateId", template, 60);
+        Cookie.set("provider", provider, 60);
+        Cookie.set("functionName", functionName, 60);
     }
 
     // This function is special cased in the Cache() decorator by name to allow for dev scenarios.
