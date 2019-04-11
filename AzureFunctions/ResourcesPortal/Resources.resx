@@ -746,7 +746,7 @@
     <value>Microsoft Account</value>
   </data>
   <data name="tryNow_createFreeAzureAccount" xml:space="preserve">
-    <value>Create a free Azure account</value>
+    <value>Sign up for a free Azure account</value>
   </data>
   <data name="tryNow_extendTrial" xml:space="preserve">
     <value>Extend trial to 24 hours</value>
@@ -839,7 +839,7 @@
     <value>Hang on while we put the 'fun' in functions...</value>
   </data>
   <data name="tryNow_discoverMore" xml:space="preserve">
-    <value>Discover more</value>
+    <value>Learn more about Azure Functions</value>
   </data>
   <data name="fileExplorer_add" xml:space="preserve">
     <value>Add</value>

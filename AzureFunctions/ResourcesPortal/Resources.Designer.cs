@@ -7795,7 +7795,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a free Azure account.
+        ///   Looks up a localized string similar to Sign up for a free Azure account.
         /// </summary>
         internal static string tryNow_createFreeAzureAccount {
             get {
@@ -7804,7 +7804,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Discover more.
+        ///   Looks up a localized string similar to Learn more about Azure Functions.
         /// </summary>
         internal static string tryNow_discoverMore {
             get {
