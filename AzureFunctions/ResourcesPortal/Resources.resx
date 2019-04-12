@@ -1694,7 +1694,7 @@
     <value>Application settings</value>
   </data>
   <data name="try_appDisabled" xml:space="preserve">
-    <value>Managing your Function app is not available for this trial.</value>
+    <value>This is the function app management page. To gain access to all platform fatures and management settings, sign up for a free Azure account. Learn more </value>
   </data>
   <data name="template" xml:space="preserve">
     <value>Template</value>

@@ -1,6 +1,7 @@
 <div *ngIf="!!message">
   <div class="disabled-background" [class.disabled-background-try]="showTryView"></div>
   <div id="disabled-message">
-    <span>{{message}}</span>
+    <span>{{message}} <a href="https://azure.microsoft.com/free/" target="_blank">{{ 'errorList_here' | translate }}</a></span>
+    
   </div>
 </div>

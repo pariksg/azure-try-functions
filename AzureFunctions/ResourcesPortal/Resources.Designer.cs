@@ -7732,7 +7732,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Managing your Function app is not available for this trial..
+        ///   Looks up a localized string similar to This is the function app management page. To gain access to all platform fatures and management settings, sign up for a free Azure account. Learn more .
         /// </summary>
         internal static string try_appDisabled {
             get {
