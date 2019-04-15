@@ -2857,4 +2857,16 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
   <data name="tryNow" xml:space="preserve">
     <value>Create a sample function app</value>
   </data>
+  <data name="step1Create" xml:space="preserve">
+    <value>Create a function app and your first function</value>
+  </data>
+  <data name="step2Test" xml:space="preserve">
+    <value>Test out your function to see that it's working</value>
+  </data>
+  <data name="step3Edit" xml:space="preserve">
+    <value>Edit your code and test out your changes</value>
+  </data>
+  <data name="step4FreeTrial" xml:space="preserve">
+    <value>Create an Azure free trial to experience all of Azure Functions</value>
+  </data>
 </root>

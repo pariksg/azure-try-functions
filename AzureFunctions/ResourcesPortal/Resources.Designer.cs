@@ -6910,6 +6910,42 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a function app and your first function.
+        /// </summary>
+        internal static string step1Create {
+            get {
+                return ResourceManager.GetString("step1Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test out your function to see that it&apos;s working.
+        /// </summary>
+        internal static string step2Test {
+            get {
+                return ResourceManager.GetString("step2Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit your code and test out your changes.
+        /// </summary>
+        internal static string step3Edit {
+            get {
+                return ResourceManager.GetString("step3Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create an Azure free trial to experience all of Azure Functions.
+        /// </summary>
+        internal static string step4FreeTrial {
+            get {
+                return ResourceManager.GetString("step4FreeTrial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
         internal static string stop {

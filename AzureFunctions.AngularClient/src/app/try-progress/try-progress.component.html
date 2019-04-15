@@ -5,7 +5,7 @@
                 <div [ngClass]="state() >= TryProgress.ResourceCreated ? 'step done' : 'step not-started'">
                     <div class="step-text">1</div>
                 </div>
-                <p>Create a function app and your first function</p>
+                <p>{{ 'step1Create' | translate }}</p>
             </div>
         </div>
 
@@ -14,7 +14,7 @@
                 <div [ngClass]="state() === TryProgress.FirstTestInProgress ? 'step in-progress' : (state() >= TryProgress.FirstTestSuccess ? 'step done' : 'step not-started')">
                     <div class="step-text">2</div>
                 </div>
-                <p>Test out your function to see that it's working</p>
+                <p>{{ 'step2Test' | translate }}</p>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                 <div [ngClass]="state() === TryProgress.EditAndTestInProgress ? 'step in-progress' : (state() >= TryProgress.EditAndTestSuccess ? 'step done' : 'step not-started')">
                     <div class="step-text">3</div>
                 </div>
-                <p>Edit your code and test out your changes</p>
+                <p>{{ 'step3Edit' | translate }}</p>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                 <div [ngClass]="state() >= TryProgress.FreeTrialClicked ? 'step in-progress' : 'step not-started'">
                     <div class="step-text">4</div>
                 </div>
-                <p>Create an Azure free trial to experience all of Azure Functions</p>
+                <p>{{ 'step4FreeTrial' | translate }}</p>
             </div>
         </div>
     </div>

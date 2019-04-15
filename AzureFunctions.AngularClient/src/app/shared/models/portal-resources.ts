@@ -914,5 +914,9 @@ export class PortalResources
     public static quickStart: string = "quickStart";
     public static stayLonger: string = "stayLonger";
     public static tryNow: string = "tryNow";
+    public static step1Create: string = "step1Create";
+    public static step2Test: string = "step2Test";
+    public static step3Edit: string = "step3Edit";
+    public static step4FreeTrial: string = "step4FreeTrial";
 }
 
