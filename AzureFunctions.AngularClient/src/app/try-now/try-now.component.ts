@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
+import { AiService } from '../shared/services/ai.service';
 
 @Component({
     selector: 'try-now',
@@ -6,6 +8,29 @@ import { Component } from '@angular/core';
     styleUrls: ['./try-now.component.scss']
 })
 export class TryNowComponent {
+    public freeTrialUri: string;
+
+    constructor(
+        private _aiService: AiService,
+        private _globalStateService: GlobalStateService) {
+        // TODO: [fashaikh] Add cookie referer details like in try
+        this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
+    }
+
+    launchFreeTrialPortal() {
+        this._globalStateService.tryProgress = TryProgress.FreeTrialClicked;
+        this.trackLinkClick("freeTrialTopClick");
+    }
+
+    trackLinkClick(buttonName: string) {
+        if (buttonName) {
+            try {
+                this._aiService.trackLinkClick(buttonName, this._globalStateService.TrialExpired.toString());
+            } catch (error) {
+                this._aiService.trackException(error, 'trackLinkClick');
+            }
+        }
+    }
 }
 /*
 import { Component, OnInit } from '@angular/core';
