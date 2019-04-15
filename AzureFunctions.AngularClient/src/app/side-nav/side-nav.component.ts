@@ -20,7 +20,7 @@ import { ConfigService } from './../shared/services/config.service';
 import { PortalResources } from './../shared/models/portal-resources';
 import { AuthzService } from './../shared/services/authz.service';
 import { LanguageService } from './../shared/services/language.service';
-import { LocalStorageKeys, Arm, LogCategories, ScenarioIds, Constants } from './../shared/models/constants';
+import { LocalStorageKeys, Arm, LogCategories, ScenarioIds } from './../shared/models/constants';
 import { PortalService } from './../shared/services/portal.service';
 import { LocalStorageService } from './../shared/services/local-storage.service';
 import { TreeNode } from '../tree-view/tree-node';
@@ -30,7 +30,7 @@ import { ArmService } from '../shared/services/arm.service';
 import { CacheService } from '../shared/services/cache.service';
 import { UserService } from '../shared/services/user.service';
 import { TryFunctionsService } from '../shared/services/try-functions.service';
-import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
+import { GlobalStateService } from '../shared/services/global-state.service';
 import { BroadcastService } from '../shared/services/broadcast.service';
 import { AiService } from '../shared/services/ai.service';
 import { DropDownElement } from '../shared/models/drop-down-element';
@@ -40,7 +40,6 @@ import { Subscription } from '../shared/models/subscription';
 import { SlotsService } from './../shared/services/slots.service';
 import { Url } from 'app/shared/Utilities/url';
 import { StartupInfo } from 'app/shared/models/portal';
-import { FileUtilities } from "app/shared/Utilities/file";
 
 @Component({
     selector: 'side-nav',
@@ -69,9 +68,9 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
     public selectedNode: TreeNode;
     public selectedDashboardType: DashboardType;
 
-    public freeTrialUri: string;
-    public discoverMoreUri: string;
-    public showTryRestartModal = false;
+    // public freeTrialUri: string;
+    // public discoverMoreUri: string;
+    // public showTryRestartModal = false;
 
     private _subscriptionsStream = new ReplaySubject<Subscription[]>(1);
     private _searchTermStream = new ReplaySubject<string>(1);
@@ -110,8 +109,8 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
         private _functionAppService: FunctionAppService,
         private _scenarioService: ScenarioService) {
 
-        this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
-        this.discoverMoreUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/services/functions/`;
+        // this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
+        // this.discoverMoreUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/services/functions/`;
 
         this.headerOnTopOfSideNav = this._scenarioService.checkScenario(ScenarioIds.headerOnTopOfSideNav).status === 'enabled';
         this.noPaddingOnSideNav = this._scenarioService.checkScenario(ScenarioIds.noPaddingOnSideNav).status === 'enabled';
@@ -496,7 +495,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
             })
             .sort((a, b) => a.displayLabel.localeCompare(b.displayLabel));
     }
-
+/*
     launchFreeTrialPortal() {
         this.globalStateService.tryProgress = TryProgress.FreeTrialClicked;
         this.trackLinkClick("freeTrialTopClick");
@@ -559,4 +558,5 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
             }
         );
     }
+*/
 }

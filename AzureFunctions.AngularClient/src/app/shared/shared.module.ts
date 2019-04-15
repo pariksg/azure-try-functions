@@ -65,6 +65,7 @@ import { ActivateWithKeysDirective } from './../controls/activate-with-keys/acti
 import { EmbeddedService } from 'app/shared/services/embedded.service';
 import { SiteService } from 'app/shared/services/site.service';
 import { TryProgressComponent } from 'app/try-progress/try-progress.component';
+import { TryTopCommandBarComponent } from './../try-top-command-bar/try-top-command-bar.component';
 
 export function ArmServiceFactory(
     http: Http,
@@ -92,6 +93,7 @@ export function AiServiceFactory() {
         TopBarComponent,
         TryNowComponent,
         TryProgressComponent,
+        TryTopCommandBarComponent,
         TopBarStandAloneLoginUserComponent,
         TryNowBusyStateComponent,
         BusyStateComponent,
@@ -132,6 +134,7 @@ export function AiServiceFactory() {
         TopBarComponent,
         TryNowComponent,
         TryProgressComponent,
+        TryTopCommandBarComponent,
         TopBarStandAloneLoginUserComponent,
         TryNowBusyStateComponent,
         BusyStateComponent,

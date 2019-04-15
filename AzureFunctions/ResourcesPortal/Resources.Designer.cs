@@ -7912,7 +7912,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Free Trial - Time remaining:.
+        ///   Looks up a localized string similar to Azure Functions trial - Time remaining:.
         /// </summary>
         internal static string tryNow_trialTimeRemaining {
             get {

@@ -33,6 +33,7 @@ import { ArmService } from '../shared/services/arm.service';
 })
 export class TryLandingComponent extends ErrorableComponent implements OnInit, OnDestroy {
     @ViewChild(BusyStateComponent) busyState: BusyStateComponent;
+    public discoverMoreUri: string;
     public functionsInfo: FunctionInfo[] = new Array();
     bc: BindingManager = new BindingManager();
     reCAPTCHASiteKey: string;
@@ -60,6 +61,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
 
         super('try-landing', broadcastService);
         this._armTryService = _armService as ArmTryService;
+        this.discoverMoreUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/services/functions/`;
     }
 
     public resolved(captchaResponse: string) {
@@ -356,4 +358,17 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
             this.busyState.clearBusyState();
         }
     }
+
+    trackLinkClick(buttonName: string) {
+      if (buttonName) {
+          try {
+              this._aiService.trackLinkClick(
+                  buttonName,
+                  this._globalStateService.TrialExpired.toString()
+              );
+          } catch (error) {
+              this._aiService.trackException(error, "trackLinkClick");
+          }
+      }
+  }
 }

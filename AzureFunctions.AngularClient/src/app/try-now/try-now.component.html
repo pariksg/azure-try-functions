@@ -22,7 +22,14 @@
                 </svg>
             </a>
         </div>
-<!--        <div class="free-trial-wrapper">
+<!--        <div *ngIf="timerText" style="white-space:nowrap;">{{ 'tryNow_trialTimeRemaining' | translate }} <span id="timer-text">{{timerText}}</span></div>
+        <span class="discover-more-wrapper">
+            <a [attr.href]="discoverMoreUri" (click)="trackLinkClick('discoverMoreClick')" target="_blank" class="discover-more-button">
+                {{ 'tryNow_discoverMore' | translate }}
+            </a>
+        </span>
+    -->
+        <div class="free-trial-wrapper">
             <a [tooltip]="freeAccountTooltip" [attr.href]="freeTrialUri" (click)="launchFreeTrialPortal()" target="_blank" class="signup-button ">
                 <span style="white-space:nowrap;">{{ 'tryNow_createFreeAzureAccount' | translate }}</span>
                 <tooltip-content #freeAccountTooltip>
@@ -32,12 +39,5 @@
                 </tooltip-content>
             </a>
         </div>
--->
-        <div *ngIf="timerText" style="white-space:nowrap;">{{ 'tryNow_trialTimeRemaining' | translate }} <span id="timer-text">{{timerText}}</span></div>
-        <span class="discover-more-wrapper">
-            <a [attr.href]="discoverMoreUri" (click)="trackLinkClick('discoverMoreClick')" target="_blank" class="discover-more-button">
-                {{ 'tryNow_discoverMore' | translate }}
-            </a>
-        </span>
     </div>
 </div>

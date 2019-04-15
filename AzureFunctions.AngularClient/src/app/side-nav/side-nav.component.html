@@ -1,4 +1,4 @@
-<div *ngIf="showTryRestartModal" id="my-modal" class="modal fade in" style="display: block">
+<!--<div *ngIf="showTryRestartModal" id="my-modal" class="modal fade in" style="display: block">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-  
+-->  
 <div class="sidenav" [class.header-on-top-of-sidenav]="headerOnTopOfSideNav">
 
     <div id="sidenav-menu"
@@ -56,7 +56,7 @@
          [attr.aria-label]="'functionApps' | translate">
         <tree-view *ngIf="rootNode" [node]="rootNode" [level]="0"></tree-view>
 
-        <div id="commands" class="commands-container">
+<!--        <div id="commands" class="commands-container">
             <div>
                 <a [tooltip]="freeAccountTooltip" [attr.href]="freeTrialUri" (click)="launchFreeTrialPortal()" target="_blank">
                     <button class="custom-button sidenav-button signup-button">{{ 'tryNow_createFreeAzureAccount' | translate }}</button>
@@ -84,7 +84,7 @@
                       <i class="fa fa-minus-circle"></i>
                       {{ 'restart' | translate }}
                     </button>
-        </div>
+        </div> -->
     </div>
 
 </div>
