@@ -1,17 +1,18 @@
-.footer {
+.progress-ribbon {
     width: 100%;
     min-width: 1024px;
-    height: 130px;
-    margin-left: auto;
-    margin-right: auto;
+    height: 80px;
     display: block;
     color: white;
     background-color: black;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 1.5;
     font-family: "Segoe UI", SegoeUI, "Segoe WP", Tahoma, Arial, sans-serif;
-    position: absolute;
+    border-top: white;
+    border-style: solid;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
 }
 
 .medium-10 {
@@ -34,16 +35,17 @@
 .step {
     border-radius: 50%;
     background-color: white;
-    height: 48px;
-    width: 48px;
+    height: 24px;
+    width: 24px;
     margin: 5%;
-    margin-left: calc(50% - 24px);
+    margin-left: calc(50% - 12px);
     margin-bottom: 1%;
 }
 
 .step-text {
     color: black;
-    font-size: 30px;
+    font-size: 16px;
+    text-align: center;
 }
 
 .p {

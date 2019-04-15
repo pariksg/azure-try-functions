@@ -24,6 +24,7 @@
   @extend .container;
   width: calc(100% - #{$sidenav-width});
   margin-left: $sidenav-width;
+  margin-top: 80px;
 }
 
 .busy-site-tabs{

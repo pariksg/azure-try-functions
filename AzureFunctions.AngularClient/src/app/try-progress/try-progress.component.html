@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="progress-ribbon">
     <div class="column medium-10">
         <div class="column medium-3">
             <div class="step-container">
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="column medium-3 end">
+        <div class="column medium-3">
             <div class="step-container">
                 <div [ngClass]="state() === TryProgress.EditAndTestInProgress ? 'step in-progress' : (state() >= TryProgress.EditAndTestSuccess ? 'step done' : 'step not-started')">
                     <div class="step-text">3</div>
@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="column medium-3 end">
+        <div class="column medium-3">
             <div class="step-container">
                 <div [ngClass]="state() >= TryProgress.FreeTrialClicked ? 'step in-progress' : 'step not-started'">
                     <div class="step-text">4</div>
