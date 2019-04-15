@@ -550,7 +550,6 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
         this.tryFunctionsSevice.deleteTrialResource().subscribe(
             () => {
                 this.globalStateService.TrialExpired = true;
-                this.tryFunctionsSevice.clearToken();
                 this.broadcastService.broadcast(BroadcastEvent.TrialExpired);
                 this.globalStateService.clearBusyState();
                 window.location.href = `${Constants.serviceHost}try`;

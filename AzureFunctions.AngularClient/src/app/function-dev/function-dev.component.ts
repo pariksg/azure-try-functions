@@ -491,10 +491,9 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         this._tryFunctionsService.deleteTrialResource().subscribe(
             () => {
                 this._globalStateService.TrialExpired = true;
-                this._tryFunctionsService.clearToken();
                 this._broadcastService.broadcast(BroadcastEvent.TrialExpired);
-                this._router.navigate([`/try`], { queryParams: { trial: true } } );
                 this._globalStateService.clearBusyState();
+                this._router.navigate([`/try`], { queryParams: { trial: true } } );
             },
             (error) => {
                 this._globalStateService.clearBusyState();

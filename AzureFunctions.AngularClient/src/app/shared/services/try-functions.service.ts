@@ -58,15 +58,6 @@ export class TryFunctionsService {
         }
     }
 
-    clearToken() {
-        Cookie.delete("TryAppServiceToken");
-        Cookie.delete("templateId");
-        Cookie.delete("provider");
-        Cookie.delete("functionName");
-        Cookie.deleteAll();
-        this._globalStateService.TryAppServiceToken = null;
-    }
-
     // This function is special cased in the Cache() decorator by name to allow for dev scenarios.
     @Cache()
     getTemplates() {

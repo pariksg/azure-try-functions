@@ -65,7 +65,6 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
     public resolved(captchaResponse: string) {
       if (captchaResponse === null) {
         this.disableTry = true;
-        this._tryFunctionsService.clearToken();
       } else {
         this.captchaCode = captchaResponse;
         this.disableTry = false;
@@ -129,7 +128,6 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                 } else {
                                   this.disableTry = true;
                                   this.captchaCode = null;
-                                  this._tryFunctionsService.clearToken();
                                   this.clearBusyState();
                                 }
                             });
@@ -220,7 +218,6 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                 } else {
                                   this.disableTry = true;
                                   this.captchaCode = null;
-                                  this._tryFunctionsService.clearToken();
                                   this.showComponentError({
                                         message: `${this._translateService.instant(PortalResources.tryLanding_functionError)}`,
                                         details: `${this._translateService.instant(PortalResources.tryLanding_functionErrorDetails)}: ${JSON.stringify(error)}`,
