@@ -3,11 +3,11 @@
 .content {
     position: absolute;
     width: 100%;
-    height: calc(100% - #{$top-bar-height} - 80px);
+    height: calc(100% - #{$top-bar-height} - #{$try-progress-height});
 
     #dashboard {
-        height: calc(100% - 80px);
-        top: 80px;
+        height: calc(100% - #{$try-progress-height});
+        top: $try-progress-height;
         padding-left: $sidenav-width;
         background-color: $body-bg-color;
     }

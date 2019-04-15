@@ -15,8 +15,8 @@
 }
 
 .disabled-background-try{
-    height: calc(100% - #{$top-bar-height} - 80px);
-    top: calc(#{$top-bar-height} + 80px);
+    height: calc(100% - #{$top-bar-height} - #{$try-progress-height});
+    top: calc(#{$top-bar-height} + #{$try-progress-height});
 }
 
 #disabled-message{
