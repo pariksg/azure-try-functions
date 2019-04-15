@@ -31,25 +31,9 @@
         <h2> {{ 'quickStart' | translate }} </h2>
         <p> {{ 'guest' | translate }} </p>
         <p> {{ 'stayLonger' | translate }} </p>
-        <div style="margin-left: 285px; margin-top: 100px;">
+        <div style="margin-left: 285px; margin-top: 25px;">
             <re-captcha (resolved)="resolved($event)" [siteKey]="reCAPTCHASiteKey"></re-captcha>
         </div>
-<!--        <div>
-            <form #captchaProtectedForm="ngForm">
-              <re-captcha
-                [(ngModel)]="captcha"
-                name="captcha"
-                required
-                siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                #captchaControl="ngModel"
-              ></re-captcha>
-              <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error">Captcha must be solved</div>
-              <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
-              <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
-              <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
-              <button (click)="formModel.captcha = ''">Reset Captcha</button>
-            </form>
-        </div>        -->
         <div>
             <button [disabled]='disableTry' class="custom-button"
                     (click)="handleLoginClick('reCAPTCHA')">

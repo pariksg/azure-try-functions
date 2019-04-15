@@ -48,10 +48,6 @@ export class TryFunctionsService {
             this._userService.getStartupInfo().subscribe(info => { this.token = info.token });
         }
 
-        this.initializeToken();
-    }
-
-    initializeToken() {
         if (Cookie.get('TryAppServiceToken')) {
             this._globalStateService.TryAppServiceToken = Cookie.get('TryAppServiceToken');
             const templateId = Cookie.get('templateId');
@@ -69,13 +65,6 @@ export class TryFunctionsService {
         Cookie.delete("functionName");
         Cookie.deleteAll();
         this._globalStateService.TryAppServiceToken = null;
-    }
-
-    setCookie(token: string, template: string, provider: string, functionName: string) {
-        Cookie.set("TryAppServiceToken", token, 60);
-        Cookie.set("templateId", template, 60);
-        Cookie.set("provider", provider, 60);
-        Cookie.set("functionName", functionName, 60);
     }
 
     // This function is special cased in the Cache() decorator by name to allow for dev scenarios.
@@ -134,6 +123,17 @@ export class TryFunctionsService {
         return this._http.post(url, JSON.stringify(template), { headers: this.getTryAppServiceHeaders() })
             .retryWhen(this.retryCreateTrialResource)
             .map(r => <UIResource>r.json());
+    }
+
+    authenticateTryAppService(code: string, selectedTemplate: FunctionTemplate, provider: string, functionName: string) {
+        const url = this.tryAppServiceUrl + '?code=' + code + '&state='
+            + encodeURIComponent(`${Constants.serviceHost}try`
+                + '?appServiceName=Function&provider=' + provider
+                + '&templateId=' + selectedTemplate.id
+                + '&functionName=' + functionName
+                + '&trial=true');
+
+        window.location.href = url;
     }
 
     deleteTrialResource(): Observable<any> {

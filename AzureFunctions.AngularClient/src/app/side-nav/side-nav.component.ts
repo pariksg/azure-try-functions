@@ -20,7 +20,7 @@ import { ConfigService } from './../shared/services/config.service';
 import { PortalResources } from './../shared/models/portal-resources';
 import { AuthzService } from './../shared/services/authz.service';
 import { LanguageService } from './../shared/services/language.service';
-import { LocalStorageKeys, Arm, LogCategories, ScenarioIds } from './../shared/models/constants';
+import { LocalStorageKeys, Arm, LogCategories, ScenarioIds, Constants } from './../shared/models/constants';
 import { PortalService } from './../shared/services/portal.service';
 import { LocalStorageService } from './../shared/services/local-storage.service';
 import { TreeNode } from '../tree-view/tree-node';
@@ -552,8 +552,8 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
                 this.globalStateService.TrialExpired = true;
                 this.tryFunctionsSevice.clearToken();
                 this.broadcastService.broadcast(BroadcastEvent.TrialExpired);
-                this.router.navigate([`/try`], { queryParams: { trial: true } });
                 this.globalStateService.clearBusyState();
+                window.location.href = `${Constants.serviceHost}try`;
             },
             error => {
                 this.globalStateService.clearBusyState();

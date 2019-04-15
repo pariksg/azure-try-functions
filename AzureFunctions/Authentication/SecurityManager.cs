@@ -43,14 +43,7 @@ namespace AzureFunctions.Authentication
 
         public static void HandleTryAppServiceResponse(HttpContextBase context)
         {
-            // Try scenario's used to require a /try path but we changed it to a query string instead.
-            if (context.Request.RawUrl.StartsWith("/try") && HttpUtility.ParseQueryString(context.Request.Url.Query)["trial"] != "true")
-            {
-                context.Response.RedirectLocation = "/?trial=true";
-                context.Response.StatusCode = 302;
-                context.Response.End();
-            }
-            else if (context.Request.Params["cookie"] != null)
+            if (context.Request.Params["cookie"] != null)
             {
                 var state = context.Request.Params["state"];
 
@@ -69,6 +62,13 @@ namespace AzureFunctions.Authentication
                     context.Response.End();
 
                 }
+            }
+            // Try scenario's used to require a /try path but we changed it to a query string instead.
+            else if (context.Request.RawUrl.StartsWith("/try") && HttpUtility.ParseQueryString(context.Request.Url.Query)["trial"] != "true")
+            {
+                context.Response.RedirectLocation = "/?trial=true";
+                context.Response.StatusCode = 302;
+                context.Response.End();
             }
         }
 

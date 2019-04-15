@@ -63,13 +63,12 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
     }
 
     public resolved(captchaResponse: string) {
-        if (captchaResponse === null) {
+      if (captchaResponse === null) {
         this.disableTry = true;
         this._tryFunctionsService.clearToken();
       } else {
         this.captchaCode = captchaResponse;
         this.disableTry = false;
-        console.log(`Resolved captcha with response ${captchaResponse}:`);
       }
     }
 
@@ -84,8 +83,6 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this._globalStateService.setBusyState();
         if (!this._globalStateService.TryAppServiceToken) {
           this.disableTry = true;
-          this.captchaCode = null;
-          this._tryFunctionsService.clearToken();
         }
 
         this._userService.getStartupInfo()
@@ -195,10 +192,8 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         // login
                         // get trial account
                         if (this.captchaCode) {
-                          this._tryFunctionsService.setCookie(this.captchaCode, selectedTemplate.id, provider, functionName);
-                          this._tryFunctionsService.initializeToken();
-                        }
-
+                          this._tryFunctionsService.authenticateTryAppService(this.captchaCode, selectedTemplate, 'reCAPTCHA', functionName);
+                        } else {
                         this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
                             .subscribe((resource) => {
                                 this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
@@ -237,6 +232,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                 }
                                 this.clearBusyState();
                             });
+                          }
                     } catch (e) {
                         this.showComponentError({
                             message: `${this._translateService.instant(PortalResources.tryLanding_functionError)}`,
