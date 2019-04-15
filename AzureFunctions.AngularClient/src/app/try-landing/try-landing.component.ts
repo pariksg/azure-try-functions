@@ -115,7 +115,8 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         this._tryFunctionsService.createTrialResource(selectedTemplate,
                             this._tryFunctionsService.selectedProvider, this._tryFunctionsService.selectedFunctionName)
                             .subscribe((resource) => {
-                                this.createFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
+                              this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
+                              this.createFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                 this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                             },
                             error => {
@@ -194,7 +195,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         if (this.captchaCode) {
                           this._tryFunctionsService.authenticateTryAppService(this.captchaCode, selectedTemplate, 'reCAPTCHA', functionName);
                         } else {
-                        this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
+                          this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
                             .subscribe((resource) => {
                                 this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
                                 this.createFunctioninResource(resource, selectedTemplate, functionName);
