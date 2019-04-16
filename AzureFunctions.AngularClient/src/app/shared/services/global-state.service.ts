@@ -138,10 +138,9 @@ export class GlobalStateService {
             try {
                 this._aiService.trackLinkClick(
                     buttonName,
-                    this.TrialExpired.toString()
-                );
+                    this.tryProgress.toString());
             } catch (error) {
-                this._aiService.trackException(error, "trackLinkClick");
+                this._aiService.trackException(error, 'trackLinkClick');
             }
         }
     }

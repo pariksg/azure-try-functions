@@ -14,4 +14,8 @@ export class TryNowComponent {
         this.freeTrialUri = this._globalStateService.freeTrialUri;
         this.azureUri = this._globalStateService.azureUri;
     }
+
+    trackLinkClick(buttonName: string) {
+        this._globalStateService.trackLinkClick(buttonName);
+    }
 }

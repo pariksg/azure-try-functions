@@ -29,7 +29,7 @@
             {{ 'downloadFunctionAppContent' | translate }}
         </button>
         <span class="discover-more-wrapper">
-            <a [attr.href]="discoverMoreUri" (click)="_globalStateService.trackLinkClick('discoverMoreClick')" target="_blank" class="discover-more-button">
+            <a [attr.href]="discoverMoreUri" (click)="trackLinkClick('discoverMoreClick')" target="_blank" class="discover-more-button">
                 {{ 'tryNow_discoverMore' | translate }}
             </a>
         </span>

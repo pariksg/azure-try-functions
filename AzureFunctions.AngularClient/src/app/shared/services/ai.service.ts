@@ -161,11 +161,10 @@ export class AiService implements IAppInsights {
     * Log a user action or other occurrence.
     * @param   name    A string to identify this event in the portal.
     * @param   expired  string - determines if the link was clicked before or after the trial had expired .
-    * @param   timeRemaining  string - determines if the link was clicked before or after the trial had expired .
     */
-    trackLinkClick(name: string, expired: string, properties?: { [name: string]: string; }, measurements?: { [name: string]: number; }) {
+    trackLinkClick(name: string, trialStage: string, properties?: { [name: string]: string; }, measurements?: { [name: string]: number; }) {
         properties = !!properties ? properties : {};
-        properties['TrialExpired'] = expired;
+        properties['TrialStage'] = trialStage;
         this.trackEvent(name, properties, measurements);
     }
 

@@ -123,4 +123,8 @@ export class TryTopCommandBarComponent implements OnInit {
             }
         );
     }
+
+    trackLinkClick(buttonName: string) {
+        this._globalStateService.trackLinkClick(buttonName);
+    }
 }

@@ -4,7 +4,7 @@
 <div class="container trylanding-container">
     <div [ngClass]="busyState?.busy? 'trylanding-body-disabled' : 'trylanding-body'">
     <div>
-        <a [attr.href]="discoverMoreUri" (click)="_globalStateService.trackLinkClick('discoverMoreClick')" target="_blank">
+        <a [attr.href]="discoverMoreUri" (click)="trackLinkClick('discoverMoreClick')" target="_blank">
             <div id="FunctionsTitle">
                 <svg style="display:none; visibility:hidden;">
                     <defs>
