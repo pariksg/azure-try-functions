@@ -359,17 +359,4 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
             this.busyState.clearBusyState();
         }
     }
-
-    trackLinkClick(buttonName: string) {
-      if (buttonName) {
-          try {
-              this._aiService.trackLinkClick(
-                  buttonName,
-                  this._globalStateService.TrialExpired.toString()
-              );
-          } catch (error) {
-              this._aiService.trackException(error, "trackLinkClick");
-          }
-      }
-  }
 }

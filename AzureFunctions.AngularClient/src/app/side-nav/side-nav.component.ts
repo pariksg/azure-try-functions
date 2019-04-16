@@ -68,10 +68,6 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
     public selectedNode: TreeNode;
     public selectedDashboardType: DashboardType;
 
-    // public freeTrialUri: string;
-    // public discoverMoreUri: string;
-    // public showTryRestartModal = false;
-
     private _subscriptionsStream = new ReplaySubject<Subscription[]>(1);
     private _searchTermStream = new ReplaySubject<string>(1);
     private _ngUnsubscribe = new Subject();
@@ -108,9 +104,6 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
         public route: ActivatedRoute,
         private _functionAppService: FunctionAppService,
         private _scenarioService: ScenarioService) {
-
-        // this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
-        // this.discoverMoreUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/services/functions/`;
 
         this.headerOnTopOfSideNav = this._scenarioService.checkScenario(ScenarioIds.headerOnTopOfSideNav).status === 'enabled';
         this.noPaddingOnSideNav = this._scenarioService.checkScenario(ScenarioIds.noPaddingOnSideNav).status === 'enabled';
@@ -495,68 +488,4 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
             })
             .sort((a, b) => a.displayLabel.localeCompare(b.displayLabel));
     }
-/*
-    launchFreeTrialPortal() {
-        this.globalStateService.tryProgress = TryProgress.FreeTrialClicked;
-        this.trackLinkClick("freeTrialTopClick");
-    }
-
-    trackLinkClick(buttonName: string) {
-        if (buttonName) {
-            try {
-                this.aiService.trackLinkClick(
-                    buttonName,
-                    this.globalStateService.TrialExpired.toString()
-                );
-            } catch (error) {
-                this.aiService.trackException(error, "trackLinkClick");
-            }
-        }
-    }
-
-    downloadFunctionAppContent() {
-        this.globalStateService.setBusyState();
-        this.aiService.trackEvent("download-function");
-
-        this._functionAppService
-            .getAppContentAsZip(this._tryFunctionAppContext)
-            .subscribe(
-            data => {
-                if (data.isSuccessful) {
-                    FileUtilities.saveFile(
-                        data.result,
-                        `${this._tryFunctionAppContext.site.name}.zip`
-                    );
-                }
-                this.globalStateService.clearBusyState();
-            },
-            () => this.globalStateService.clearBusyState()
-            );
-    }
-
-    showRestartModal() {
-        this.showTryRestartModal = true;
-    }
-
-    hideModal() {
-        this.showTryRestartModal = false;
-    }
-
-    deleteFunctionApp() {
-        this.globalStateService.setBusyState();
-        this.globalStateService.tryProgress = TryProgress.NotStarted;
-        this.aiService.trackEvent("delete-function");
-        this.tryFunctionsSevice.deleteTrialResource().subscribe(
-            () => {
-                this.globalStateService.TrialExpired = true;
-                this.broadcastService.broadcast(BroadcastEvent.TrialExpired);
-                this.globalStateService.clearBusyState();
-                window.location.href = `${Constants.serviceHost}try`;
-            },
-            error => {
-                this.globalStateService.clearBusyState();
-            }
-        );
-    }
-*/
 }
