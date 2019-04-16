@@ -1,7 +1,7 @@
 <div class="wrapper">
     <div class="tryinfo-box">
         <div class="azure-logo-wrapper">
-            <a href="https://azure.microsoft.com/" target="_blank" (click)="_globalStateService.trackLinkClick('azureLogoTopClick')" title="Microsoft Azure">
+            <a [attr.href]="azureUri" target="_blank" (click)="_globalStateService.trackLinkClick('azureLogoTopClick')" title="Microsoft Azure">
                 <svg style="display:none; visibility:hidden;">
                     <defs>
                         <symbol id="svg-msazure-logo" viewBox="0 0 506 72">
@@ -23,7 +23,7 @@
             </a>
         </div>
         <div class="free-trial-wrapper">
-            <a [tooltip]="freeAccountTooltip" [attr.href]="freeTrialUri" (click)="launchFreeTrialPortal()" target="_blank" class="signup-button ">
+            <a [tooltip]="freeAccountTooltip" [attr.href]="freeTrialUri" (click)="_globalStateService.trackLinkClick('freeTrialTopClick')" target="_blank" class="signup-button ">
                 <span style="white-space:nowrap;">{{ 'tryNow_createFreeAzureAccount' | translate }}</span>
                 <tooltip-content #freeAccountTooltip>
                     <p>

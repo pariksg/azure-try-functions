@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
+import { GlobalStateService } from '../shared/services/global-state.service';
 
 @Component({
     selector: 'try-now',
@@ -8,14 +8,10 @@ import { GlobalStateService, TryProgress } from '../shared/services/global-state
 })
 export class TryNowComponent {
     public freeTrialUri: string;
+    azureUri: string;
 
-    constructor(
-        private _globalStateService: GlobalStateService) {
-        this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
-    }
-
-    launchFreeTrialPortal() {
-        this._globalStateService.tryProgress = TryProgress.FreeTrialClicked;
-        this._globalStateService.trackLinkClick("freeTrialTopClick");
+    constructor(private _globalStateService: GlobalStateService) {
+        this.freeTrialUri = this._globalStateService.freeTrialUri;
+        this.azureUri = this._globalStateService.azureUri;
     }
 }

@@ -40,6 +40,8 @@ export class GlobalStateService {
     private _tryAppServicetoken: string;
     private _globalDisabled = false;
     private _trialExpired = false;
+    freeTrialUri: string;
+    azureUri: string;
 
     constructor(private _userService: UserService,
         private _aiService: AiService) {
@@ -48,6 +50,8 @@ export class GlobalStateService {
         this._userService.getStartupInfo().subscribe(info => this._token = info.token);
         this.enabledApiProxy.next(false);
         this.showTryView = Url.getParameterByName(null, 'trial') === 'true';
+        this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
+        this.azureUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}`;
     }
 
     get FunctionContainer(): FunctionContainer {
