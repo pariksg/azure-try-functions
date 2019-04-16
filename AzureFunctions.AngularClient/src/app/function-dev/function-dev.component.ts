@@ -22,7 +22,7 @@ import { PortalService } from '../shared/services/portal.service';
 import { BindingType } from '../shared/models/binding';
 import { RunFunctionResult } from '../shared/models/run-function-result';
 import { FileExplorerComponent } from '../file-explorer/file-explorer.component';
-import { GlobalStateService } from '../shared/services/global-state.service';
+import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
 import { BusyStateComponent } from '../busy-state/busy-state.component';
 import { PortalResources } from '../shared/models/portal-resources';
 import { AiService } from '../shared/services/ai.service';
@@ -37,7 +37,6 @@ import { MonacoHelper } from '../shared/Utilities/monaco.helper';
 import { AccessibilityHelper } from '../shared/Utilities/accessibility-helper';
 import { Router } from '@angular/router';
 import { TryFunctionsService } from 'app/shared/services/try-functions.service';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Component({
     selector: 'function-dev',
@@ -492,13 +491,9 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         this._tryFunctionsService.deleteTrialResource().subscribe(
             () => {
                 this._globalStateService.TrialExpired = true;
-                this._globalStateService.TryAppServiceToken = null;
-                Cookie.delete('TryAppServiceToken');
-                Cookie.delete('functionName');
-                Cookie.delete('provider');
-                Cookie.delete('templateId');
-                this._router.navigate([`/try`], { queryParams: { trial: true } } );
+                this._broadcastService.broadcast(BroadcastEvent.TrialExpired);
                 this._globalStateService.clearBusyState();
+                this._router.navigate([`/try`], { queryParams: { trial: true } } );
             },
             (error) => {
                 this._globalStateService.clearBusyState();
@@ -506,6 +501,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         }
 
     contentChanged(content: string) {
+        this._globalStateService.tryProgress = TryProgress.EditAndTestInProgress;
         if (!this.scriptFile.isDirty) {
             this.scriptFile.isDirty = true;
             this._broadcastService.setDirtyState('function');
@@ -534,6 +530,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
 
     runFunction() {
         this._aiService.trackEvent('run-function', { runValid: this.runValid.toString() });
+        this._globalStateService.tryProgress = this._globalStateService.tryProgress > TryProgress.FirstTestInProgress ? this._globalStateService.tryProgress : TryProgress.FirstTestInProgress;
         if (!this.runValid) {
             return;
         }
@@ -711,6 +708,12 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
 
             this.running = result
                 .switchMap(r => {
+                    if (r.result.statusCode >= 400) {
+                        this._globalStateService.tryProgress = this._globalStateService.tryProgress >= TryProgress.EditAndTestInProgress ? TryProgress.EditAndTestInProgress : TryProgress.FirstTestInProgress;
+                    } else {
+                        this._globalStateService.tryProgress = this._globalStateService.tryProgress > TryProgress.EditAndTestSuccess ? this._globalStateService.tryProgress : (this._globalStateService.tryProgress <= TryProgress.FirstTestSuccess ? TryProgress.FirstTestSuccess : TryProgress.EditAndTestSuccess);
+                    }
+
                     return r.result.statusCode >= 400
                         ? this._functionAppService.getFunctionErrors(this.context, this.functionInfo).map(_ => r)
                         : Observable.of(r);
@@ -719,7 +722,6 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
                     this.runResult = r.result;
                     this._globalStateService.clearBusyState();
                     delete this.running;
-
                 }, () => this._globalStateService.clearBusyState());
         }
     }

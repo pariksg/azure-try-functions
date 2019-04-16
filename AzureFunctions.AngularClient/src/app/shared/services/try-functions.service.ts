@@ -116,6 +116,17 @@ export class TryFunctionsService {
             .map(r => <UIResource>r.json());
     }
 
+    authenticateTryAppService(code: string, selectedTemplate: FunctionTemplate, provider: string, functionName: string) {
+        const url = this.tryAppServiceUrl + '?code=' + code + '&state='
+            + encodeURIComponent(`${Constants.serviceHost}try`
+                + '?appServiceName=Function&provider=' + provider
+                + '&templateId=' + selectedTemplate.id
+                + '&functionName=' + functionName
+                + '&trial=true');
+
+        window.location.href = url;
+    }
+
     deleteTrialResource(): Observable<any> {
         const url = this.tryAppServiceUrl + '/api/resource';
         return this._http.delete(url, { headers: this.getTryAppServiceHeaders() })

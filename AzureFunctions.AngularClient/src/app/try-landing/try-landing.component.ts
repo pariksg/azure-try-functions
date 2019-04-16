@@ -16,7 +16,7 @@ import { BroadcastEvent } from '../shared/models/broadcast-event';
 import { FunctionTemplate } from '../shared/models/function-template';
 import { FunctionInfo } from '../shared/models/function-info';
 import { BindingManager } from '../shared/models/binding-manager';
-import { GlobalStateService } from '../shared/services/global-state.service';
+import { GlobalStateService, TryProgress } from '../shared/services/global-state.service';
 import { UIResource } from '../shared/models/ui-resource';
 import { BusyStateComponent } from '../busy-state/busy-state.component';
 import { PortalResources } from '../shared/models/portal-resources';
@@ -33,8 +33,12 @@ import { ArmService } from '../shared/services/arm.service';
 })
 export class TryLandingComponent extends ErrorableComponent implements OnInit, OnDestroy {
     @ViewChild(BusyStateComponent) busyState: BusyStateComponent;
+    public discoverMoreUri: string;
     public functionsInfo: FunctionInfo[] = new Array();
     bc: BindingManager = new BindingManager();
+    reCAPTCHASiteKey: string;
+    disableTry = true;
+    captchaCode: string;
     loginOptions = false;
     selectedFunction: string;
     selectedLanguage: string;
@@ -57,6 +61,16 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
 
         super('try-landing', broadcastService);
         this._armTryService = _armService as ArmTryService;
+        this.discoverMoreUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/services/functions/`;
+    }
+
+    public resolved(captchaResponse: string) {
+      if (captchaResponse === null) {
+        this.disableTry = true;
+      } else {
+        this.captchaCode = captchaResponse;
+        this.disableTry = false;
+      }
     }
 
     ngOnInit() {
@@ -68,6 +82,9 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this.selectedLanguage = this._tryFunctionsService.selectedLanguage || 'JavaScript';
 
         this._globalStateService.setBusyState();
+        if (!this._globalStateService.TryAppServiceToken) {
+          this.disableTry = true;
+        }
 
         this._userService.getStartupInfo()
             .takeUntil(this._ngUnsubscribe)
@@ -76,6 +93,17 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
             })
             .subscribe(templates => {
                 this._globalStateService.clearBusyState();
+                if (window.location.hostname === 'localhost' && !window.appsvc.env.reCAPTCHASiteKey) {
+                  // default to tryAppService hostest reCaptcha redirection
+                  this.reCAPTCHASiteKey = null;
+                  this.disableTry = false;
+                } else if (window.appsvc.env.reCAPTCHASiteKey) {
+                  this.reCAPTCHASiteKey = window.appsvc.env.reCAPTCHASiteKey;
+                } else {
+                  // default to tryAppService hosted reCaptcha redirection
+                  this.reCAPTCHASiteKey = null;
+                  this.disableTry = false;
+                }
 
                 if (this._globalStateService.TryAppServiceToken) {
                     const selectedTemplate: FunctionTemplate = templates.find((t) => {
@@ -87,7 +115,9 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         this._tryFunctionsService.createTrialResource(selectedTemplate,
                             this._tryFunctionsService.selectedProvider, this._tryFunctionsService.selectedFunctionName)
                             .subscribe((resource) => {
+                                this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
                                 this.createFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
+                                this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                             },
                             error => {
                                 if (error.status === 400) {
@@ -95,9 +125,12 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                     // we'll get a HTTP 400 ..so lets get it.
                                     this._tryFunctionsService.getTrialResource(this._tryFunctionsService.selectedProvider)
                                         .subscribe((resource) => {
+                                            this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                                             this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                         });
                                 } else {
+                                    this.disableTry = true;
+                                    this.captchaCode = null;
                                     this.clearBusyState();
                                 }
                             });
@@ -159,10 +192,14 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         this.setBusyState();
                         // login
                         // get trial account
-                        this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
+                        if (this.captchaCode) {
+                          this._tryFunctionsService.authenticateTryAppService(this.captchaCode, selectedTemplate, 'reCAPTCHA', functionName);
+                        } else {
+                          this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
                             .subscribe((resource) => {
                                 this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
                                 this.createFunctioninResource(resource, selectedTemplate, functionName);
+                                this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                             }, (error: Response) => {
                                 if (error.status === 401 || error.status === 403) {
                                     // show login options
@@ -177,11 +214,14 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                 } else if (error.status === 400) {
                                     this._tryFunctionsService.getTrialResource(provider)
                                         .subscribe((resource) => {
+                                            this._globalStateService.tryProgress = TryProgress.ResourceCreated;
                                             this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
                                         }
                                         );
                                 } else {
-                                    this.showComponentError({
+                                  this.disableTry = true;
+                                  this.captchaCode = null;
+                                  this.showComponentError({
                                         message: `${this._translateService.instant(PortalResources.tryLanding_functionError)}`,
                                         details: `${this._translateService.instant(PortalResources.tryLanding_functionErrorDetails)}: ${JSON.stringify(error)}`,
                                         errorId: errorIds.tryAppServiceError,
@@ -192,6 +232,7 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                                 }
                                 this.clearBusyState();
                             });
+                          }
                     } catch (e) {
                         this.showComponentError({
                             message: `${this._translateService.instant(PortalResources.tryLanding_functionError)}`,
@@ -318,4 +359,17 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
             this.busyState.clearBusyState();
         }
     }
+
+    trackLinkClick(buttonName: string) {
+      if (buttonName) {
+          try {
+              this._aiService.trackLinkClick(
+                  buttonName,
+                  this._globalStateService.TrialExpired.toString()
+              );
+          } catch (error) {
+              this._aiService.trackException(error, "trackLinkClick");
+          }
+      }
+  }
 }

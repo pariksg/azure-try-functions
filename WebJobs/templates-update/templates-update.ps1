@@ -52,7 +52,7 @@ try {
     # clone respective branch at the build location, if it is not already present
     $defaultTemplatesBinDirectory = $binDirectory + "default"
     if (!(Test-Path -Path $defaultTemplatesBinDirectory -PathType Container)) {
-        Remove-Item $defaultTemplatesBinDirectory -ItemType Directory
+        Remove-Item $defaultTemplatesBinDirectory -Recurse -Force
         New-Item $defaultTemplatesBinDirectory -ItemType Directory
         Start-Process git -ArgumentList "clone -b $branch $repoUrl $defaultTemplatesBinDirectory" -NoNewWindow -Wait
     }

@@ -6910,6 +6910,42 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a function app and your first function.
+        /// </summary>
+        internal static string step1Create {
+            get {
+                return ResourceManager.GetString("step1Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test out your function to see that it&apos;s working.
+        /// </summary>
+        internal static string step2Test {
+            get {
+                return ResourceManager.GetString("step2Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit your code and test out your changes.
+        /// </summary>
+        internal static string step3Edit {
+            get {
+                return ResourceManager.GetString("step3Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create an Azure free trial to experience all of Azure Functions.
+        /// </summary>
+        internal static string step4FreeTrial {
+            get {
+                return ResourceManager.GetString("step4FreeTrial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
         internal static string stop {
@@ -7732,7 +7768,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Managing your Function app is not available for this trial..
+        ///   Looks up a localized string similar to This is the function app management page. To gain access to all platform fatures and management settings, sign up for a free Azure account. Learn more .
         /// </summary>
         internal static string try_appDisabled {
             get {
@@ -7786,7 +7822,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try Azure Functions now.
+        ///   Looks up a localized string similar to Create a sample function app.
         /// </summary>
         internal static string tryNow {
             get {
@@ -7795,7 +7831,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a free Azure account.
+        ///   Looks up a localized string similar to Sign up for a free Azure account.
         /// </summary>
         internal static string tryNow_createFreeAzureAccount {
             get {
@@ -7804,7 +7840,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Discover more.
+        ///   Looks up a localized string similar to Learn more about Azure Functions.
         /// </summary>
         internal static string tryNow_discoverMore {
             get {
@@ -7876,7 +7912,7 @@ namespace AzureFunctions.ResourcesPortal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Free Trial - Time remaining:.
+        ///   Looks up a localized string similar to Azure Functions trial - Time remaining:.
         /// </summary>
         internal static string tryNow_trialTimeRemaining {
             get {

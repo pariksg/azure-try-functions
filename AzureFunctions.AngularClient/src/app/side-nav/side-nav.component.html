@@ -1,3 +1,19 @@
+<!--<div *ngIf="showTryRestartModal" id="my-modal" class="modal fade in" style="display: block">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="hideModal()">&times;</button>
+          <span class="text-label">Restart from a blank function app?</span>
+        </div>
+        <div class="modal-body keys-dialog-body">
+            <div class="text-label">This action will delete your current progress and give you a fresh experience</div>
+            <button type="button" class="custom-button-invert" (click)="deleteFunctionApp()"><i class="fa fa-minus-circle"></i>Yes, delete and restart</button>
+            <button type="button" class="custom-button-invert" data-dismiss="modal" (click)="hideModal()">No, cancel</button>
+            </div>
+        </div>
+      </div>
+    </div>
+-->  
 <div class="sidenav" [class.header-on-top-of-sidenav]="headerOnTopOfSideNav">
 
     <div id="sidenav-menu"
@@ -39,6 +55,36 @@
          role="tree"
          [attr.aria-label]="'functionApps' | translate">
         <tree-view *ngIf="rootNode" [node]="rootNode" [level]="0"></tree-view>
+
+<!--        <div id="commands" class="commands-container">
+            <div>
+                <a [tooltip]="freeAccountTooltip" [attr.href]="freeTrialUri" (click)="launchFreeTrialPortal()" target="_blank">
+                    <button class="custom-button sidenav-button signup-button">{{ 'tryNow_createFreeAzureAccount' | translate }}</button>
+                    <tooltip-content #freeAccountTooltip>
+                        <p>
+                            {{ 'tryNow_FreeAccountToolTip' | translate }}
+                        </p>
+                    </tooltip-content>
+                </a>
+            </div>
+            <span class="discover-more-wrapper">
+                <a [attr.href]="discoverMoreUri" (click)="trackLinkClick('discoverMoreClick')" target="_blank">
+                    <button class="custom-button sidenav-button discover-more-button">{{ 'tryNow_discoverMore' | translate }}</button>
+                </a>
+            </span>
+
+                <button 
+                        class="custom-button sidenav-button"
+                        (click)="downloadFunctionAppContent()">
+                        <i class="fa fa-download"></i>
+                        {{ 'downloadFunctionAppContent' | translate }}
+                </button>
+              <button class="custom-button-invert sidenav-button"
+                      (click)="showRestartModal()">
+                      <i class="fa fa-minus-circle"></i>
+                      {{ 'restart' | translate }}
+                    </button>
+        </div> -->
     </div>
 
 </div>

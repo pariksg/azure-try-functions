@@ -746,13 +746,13 @@
     <value>Microsoft Account</value>
   </data>
   <data name="tryNow_createFreeAzureAccount" xml:space="preserve">
-    <value>Create a free Azure account</value>
+    <value>Sign up for a free Azure account</value>
   </data>
   <data name="tryNow_extendTrial" xml:space="preserve">
     <value>Extend trial to 24 hours</value>
   </data>
   <data name="tryNow_trialTimeRemaining" xml:space="preserve">
-    <value>Free Trial - Time remaining:</value>
+    <value>Azure Functions trial - Time remaining:</value>
   </data>
   <data name="tryLanding_functionError" xml:space="preserve">
     <value>Function creation error! Please try again.</value>
@@ -839,7 +839,7 @@
     <value>Hang on while we put the 'fun' in functions...</value>
   </data>
   <data name="tryNow_discoverMore" xml:space="preserve">
-    <value>Discover more</value>
+    <value>Learn more about Azure Functions</value>
   </data>
   <data name="fileExplorer_add" xml:space="preserve">
     <value>Add</value>
@@ -1694,7 +1694,7 @@
     <value>Application settings</value>
   </data>
   <data name="try_appDisabled" xml:space="preserve">
-    <value>Managing your Function app is not available for this trial.</value>
+    <value>This is the function app management page. To gain access to all platform fatures and management settings, sign up for a free Azure account. Learn more </value>
   </data>
   <data name="template" xml:space="preserve">
     <value>Template</value>
@@ -2855,6 +2855,18 @@ Set to "External URL" to use an API definition that is hosted elsewhere.</value>
     <value>Sign up for an Azure free trial to get the full Azure Functions experience.</value>
   </data>
   <data name="tryNow" xml:space="preserve">
-    <value>Try Azure Functions now</value>
+    <value>Create a sample function app</value>
+  </data>
+  <data name="step1Create" xml:space="preserve">
+    <value>Create a function app and your first function</value>
+  </data>
+  <data name="step2Test" xml:space="preserve">
+    <value>Test out your function to see that it's working</value>
+  </data>
+  <data name="step3Edit" xml:space="preserve">
+    <value>Edit your code and test out your changes</value>
+  </data>
+  <data name="step4FreeTrial" xml:space="preserve">
+    <value>Create an Azure free trial to experience all of Azure Functions</value>
   </data>
 </root>

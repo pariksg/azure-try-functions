@@ -6,6 +6,7 @@ interface Environment {
   runtimeType: 'OnPrem' | 'Azure' | 'Standalone';
   azureResourceManagerEndpoint: string;
   tryAppServiceUrl: string;
+  reCAPTCHASiteKey: string;
 }
 
 interface AppSvc {

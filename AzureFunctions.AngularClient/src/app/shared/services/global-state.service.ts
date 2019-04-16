@@ -10,6 +10,16 @@ import { UserService } from './user.service';
 import { BusyStateComponent } from '../../busy-state/busy-state.component';
 import { TryFunctionsService } from './try-functions.service';
 
+export enum TryProgress {
+    NotStarted = 0,
+    ResourceCreated,
+    FirstTestInProgress,
+    FirstTestSuccess,
+    EditAndTestInProgress,
+    EditAndTestSuccess,
+    FreeTrialClicked
+}
+
 @Injectable()
 export class GlobalStateService {
     public _functionsService: TryFunctionsService;
@@ -19,6 +29,7 @@ export class GlobalStateService {
     public enabledApiProxy: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public topBarNotificationsStream = new ReplaySubject<TopBarNotification[]>(1);
     public disabledMessage = new Subject<string>();
+    public tryProgress = TryProgress.NotStarted;
 
     private _functionContainer: FunctionContainer;
     private _appSettings: { [key: string]: string };

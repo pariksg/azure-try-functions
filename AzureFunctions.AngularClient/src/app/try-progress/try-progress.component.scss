@@ -1,0 +1,68 @@
+@import '../../sass/common/variables';
+
+.progress-ribbon {
+    width: 100%;
+    min-width: 1024px;
+    height: $try-progress-height;
+    display: block;
+    color: white;
+    background-color: black;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: "Segoe UI", SegoeUI, "Segoe WP", Tahoma, Arial, sans-serif;
+    border-top: white;
+    border-style: solid;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+}
+
+.medium-10 {
+    width: 100%;
+}
+
+.column {
+    float: left;
+}
+
+.medium-3 {
+    width: 25%;
+}
+
+.step-container {
+    position: relative;
+    text-align: center;
+}
+
+.step {
+    border-radius: 50%;
+    background-color: white;
+    height: 24px;
+    width: 24px;
+    margin: 5%;
+    margin-left: calc(50% - 12px);
+    margin-bottom: 1%;
+}
+
+.step-text {
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+
+.p {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.not-started {
+    background-color: white;
+}
+
+.in-progress {
+    background-color: blue;
+}
+
+.done {
+    background-color: green;
+}

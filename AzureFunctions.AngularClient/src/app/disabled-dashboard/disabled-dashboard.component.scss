@@ -15,8 +15,8 @@
 }
 
 .disabled-background-try{
-    height: calc(100% - #{$top-bar-height});
-    top: $top-bar-height;
+    height: calc(100% - #{$top-bar-height} - #{$top-bar-height} - #{$try-progress-height});
+    top: calc(#{$top-bar-height} + #{$top-bar-height} + #{$try-progress-height});
 }
 
 #disabled-message{
