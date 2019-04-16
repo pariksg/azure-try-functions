@@ -9,6 +9,7 @@ import { FunctionContainer } from '../models/function-container';
 import { UserService } from './user.service';
 import { BusyStateComponent } from '../../busy-state/busy-state.component';
 import { TryFunctionsService } from './try-functions.service';
+import { AiService } from './ai.service';
 
 export enum TryProgress {
     NotStarted = 0,
@@ -39,13 +40,18 @@ export class GlobalStateService {
     private _tryAppServicetoken: string;
     private _globalDisabled = false;
     private _trialExpired = false;
+    freeTrialUri: string;
+    azureUri: string;
 
-    constructor(private _userService: UserService) {
+    constructor(private _userService: UserService,
+        private _aiService: AiService) {
         this._appSettings = {};
 
         this._userService.getStartupInfo().subscribe(info => this._token = info.token);
         this.enabledApiProxy.next(false);
         this.showTryView = Url.getParameterByName(null, 'trial') === 'true';
+        this.freeTrialUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/free`;
+        this.azureUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}`;
     }
 
     get FunctionContainer(): FunctionContainer {
@@ -126,4 +132,16 @@ export class GlobalStateService {
     get TrialExpired(): boolean {
         return this._trialExpired;
     }
-}
+
+    trackLinkClick(buttonName: string) {
+        if (buttonName) {
+            try {
+                this._aiService.trackLinkClick(
+                    buttonName,
+                    this.tryProgress.toString());
+            } catch (error) {
+                this._aiService.trackException(error, 'trackLinkClick');
+            }
+        }
+    }
+  }

@@ -1,5 +1,9 @@
 @import '../../sass/common/variables';
 
+a:link, a:hover, a:visited {
+    text-decoration: none;
+}
+
 h1, h2{
     margin-top: 30px;
 }

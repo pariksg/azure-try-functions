@@ -79,19 +79,6 @@ export class TryTopCommandBarComponent implements OnInit {
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
 
-    trackLinkClick(buttonName: string) {
-        if (buttonName) {
-            try {
-                this._aiService.trackLinkClick(
-                    buttonName,
-                    this._globalStateService.TrialExpired.toString()
-                );
-            } catch (error) {
-                this._aiService.trackException(error, "trackLinkClick");
-            }
-        }
-    }
-
     downloadFunctionAppContent() {
         this._globalStateService.setBusyState();
         this._aiService.trackEvent("download-function");
@@ -135,5 +122,9 @@ export class TryTopCommandBarComponent implements OnInit {
                 this._globalStateService.clearBusyState();
             }
         );
+    }
+
+    trackLinkClick(buttonName: string) {
+        this._globalStateService.trackLinkClick(buttonName);
     }
 }
