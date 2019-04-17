@@ -77,38 +77,3 @@
         outline: none;
     }
 }
-
-.commands-container {
-    height: 50%;
-    bottom: 0;
-    position: absolute;
-    border-top: black;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 0px;
-    border-style: solid;
-    width: $sidenav-width;
-}
-
-.sidenav-button {
-    margin-top: 20px;
-    width: 85%;
-    font-size: 12px;
-    padding: 5px 10px 5px 10px;
-}
-
-.signup-button {
-    background-color: #89c402;
-}
-
-.signup-button:hover {
-    background-color: #a5ce00;
-}
-
-.discover-more-button {
-    background-color: slateblue;
-}
-
-.discover-more-button:hover {
-    background-color: rebeccapurple;
-}

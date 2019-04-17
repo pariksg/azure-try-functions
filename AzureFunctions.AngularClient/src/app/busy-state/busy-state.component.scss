@@ -22,9 +22,10 @@
 
 .busy-dashboard{
   @extend .container;
+  height: calc(100% - #{$top-bar-height} - #{$top-bar-height} - #{$try-progress-height});
   width: calc(100% - #{$sidenav-width});
   margin-left: $sidenav-width;
-  margin-top: calc(#{$try-progress-height} + #{$try-progress-height});
+  margin-top: calc(#{$top-bar-height} + #{$try-progress-height});
 }
 
 .busy-site-tabs{

@@ -35,8 +35,6 @@ import { HttpRunModel } from '../shared/models/http-run';
 import { FunctionKeys } from '../shared/models/function-key';
 import { MonacoHelper } from '../shared/Utilities/monaco.helper';
 import { AccessibilityHelper } from '../shared/Utilities/accessibility-helper';
-import { Router } from '@angular/router';
-import { TryFunctionsService } from 'app/shared/services/try-functions.service';
 
 @Component({
     selector: 'function-dev',
@@ -103,9 +101,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         private _globalStateService: GlobalStateService,
         private _translateService: TranslateService,
         private _aiService: AiService,
-        private _tryFunctionsService: TryFunctionsService,
         private _functionAppService: FunctionAppService,
-        private _router: Router,
         private cd: ChangeDetectorRef) {
         super('function-dev', _functionAppService, broadcastService, () => _globalStateService.setBusyState());
 
@@ -465,40 +461,6 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
                 this._globalStateService.clearBusyState();
             });
     }
-
-    downloadFunctionAppContent(dontTrack?: boolean) {
-        this._globalStateService.setBusyState();
-        if (!dontTrack) {
-            this._aiService.trackEvent('download-function', { isDirty: this.scriptFile.isDirty.toString() });
-        }
-
-        this.saveScript(false, true);
-        this._functionAppService.getAppContentAsZip(this.context).subscribe(
-            data => {
-                if (data.isSuccessful) {
-                    FileUtilities.saveFile(data.result, `${this.context.site.name}.zip`);
-                }
-                this._globalStateService.clearBusyState();
-            },
-            () => this._globalStateService.clearBusyState()
-        );
-    }
-
-    deleteFunctionApp() {
-        this._globalStateService.setBusyState();
-        this._aiService.trackEvent('delete-function', { isDirty: this.scriptFile.isDirty.toString() });
-        this.downloadFunctionAppContent(true);
-        this._tryFunctionsService.deleteTrialResource().subscribe(
-            () => {
-                this._globalStateService.TrialExpired = true;
-                this._broadcastService.broadcast(BroadcastEvent.TrialExpired);
-                this._globalStateService.clearBusyState();
-                this._router.navigate([`/try`], { queryParams: { trial: true } } );
-            },
-            (error) => {
-                this._globalStateService.clearBusyState();
-            });
-        }
 
     contentChanged(content: string) {
         this._globalStateService.tryProgress = TryProgress.EditAndTestInProgress;
