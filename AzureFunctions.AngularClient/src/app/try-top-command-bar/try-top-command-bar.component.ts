@@ -101,16 +101,18 @@ export class TryTopCommandBarComponent implements OnInit {
 
     showRestartModal() {
         this.showTryRestartModal = true;
+        this._aiService.trackEvent("show-restart-modal");
     }
 
     hideModal() {
         this.showTryRestartModal = false;
+        this._aiService.trackEvent("close-restart-modal");
     }
 
     deleteFunctionApp() {
         this._globalStateService.setBusyState();
         this._globalStateService.tryProgress = TryProgress.NotStarted;
-        this._aiService.trackEvent("delete-function");
+        this._aiService.trackEvent("restart-try-function");
         this._functionsService.deleteTrialResource().subscribe(
             () => {
                 this._globalStateService.TrialExpired = true;

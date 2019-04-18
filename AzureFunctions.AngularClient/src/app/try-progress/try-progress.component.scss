@@ -45,9 +45,9 @@
 }
 
 .step-text {
-    color: black;
     font-size: 16px;
     text-align: center;
+    font-weight: 600;
 }
 
 .p {
@@ -56,13 +56,16 @@
 }
 
 .not-started {
+    color: black;
     background-color: white;
 }
 
 .in-progress {
-    background-color: blue;
+    color: white;
+    background-color: #0058ad;
 }
 
 .done {
-    background-color: green;
+    color: black;
+    background-color: #89c402;
 }

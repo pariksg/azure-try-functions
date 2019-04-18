@@ -417,6 +417,7 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
         if (!this.scriptFile.isDirty) {
             return null;
         }
+        this._globalStateService.codeEdited = true;
         let syncTriggers = false;
         if (this.scriptFile.href.toLocaleLowerCase() === this.functionInfo.config_href.toLocaleLowerCase()) {
             try {
@@ -463,7 +464,6 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
     }
 
     contentChanged(content: string) {
-        this._globalStateService.tryProgress = TryProgress.EditAndTestInProgress;
         if (!this.scriptFile.isDirty) {
             this.scriptFile.isDirty = true;
             this._broadcastService.setDirtyState('function');
@@ -492,7 +492,9 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
 
     runFunction() {
         this._aiService.trackEvent('run-function', { runValid: this.runValid.toString() });
-        this._globalStateService.tryProgress = this._globalStateService.tryProgress > TryProgress.FirstTestInProgress ? this._globalStateService.tryProgress : TryProgress.FirstTestInProgress;
+        this._globalStateService.tryProgress =
+            this._globalStateService.codeEdited ? TryProgress.EditAndTestTried : TryProgress.FirstTestTried;
+
         if (!this.runValid) {
             return;
         }
@@ -670,12 +672,6 @@ export class FunctionDevComponent extends FunctionAppContextComponent implements
 
             this.running = result
                 .switchMap(r => {
-                    if (r.result.statusCode >= 400) {
-                        this._globalStateService.tryProgress = this._globalStateService.tryProgress >= TryProgress.EditAndTestInProgress ? TryProgress.EditAndTestInProgress : TryProgress.FirstTestInProgress;
-                    } else {
-                        this._globalStateService.tryProgress = this._globalStateService.tryProgress > TryProgress.EditAndTestSuccess ? this._globalStateService.tryProgress : (this._globalStateService.tryProgress <= TryProgress.FirstTestSuccess ? TryProgress.FirstTestSuccess : TryProgress.EditAndTestSuccess);
-                    }
-
                     return r.result.statusCode >= 400
                         ? this._functionAppService.getFunctionErrors(this.context, this.functionInfo).map(_ => r)
                         : Observable.of(r);

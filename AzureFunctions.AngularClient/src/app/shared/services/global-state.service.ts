@@ -14,11 +14,8 @@ import { AiService } from './ai.service';
 export enum TryProgress {
     NotStarted = 0,
     ResourceCreated,
-    FirstTestInProgress,
-    FirstTestSuccess,
-    EditAndTestInProgress,
-    EditAndTestSuccess,
-    FreeTrialClicked
+    FirstTestTried,
+    EditAndTestTried,
 }
 
 @Injectable()
@@ -31,6 +28,7 @@ export class GlobalStateService {
     public topBarNotificationsStream = new ReplaySubject<TopBarNotification[]>(1);
     public disabledMessage = new Subject<string>();
     public tryProgress = TryProgress.NotStarted;
+    public codeEdited = false;
 
     private _functionContainer: FunctionContainer;
     private _appSettings: { [key: string]: string };
