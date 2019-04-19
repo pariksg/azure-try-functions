@@ -34,8 +34,8 @@
         <h2> {{ 'quickStart' | translate }} </h2>
         <p> {{ 'guest' | translate }} </p>
         <p> {{ 'stayLonger' | translate }} </p>
-        <div style="margin-left: 285px; margin-top: 25px;">
-            <re-captcha (resolved)="resolved($event)" [siteKey]="reCAPTCHASiteKey"></re-captcha>
+        <div *ngIf='reCAPTCHASiteKey' style="margin-left: 285px; margin-top: 25px;">
+            <re-captcha (resolved)="resolved($event)" [siteKey]='reCAPTCHASiteKey'></re-captcha>
         </div>
         <div>
             <button [disabled]='disableTry' class="custom-button"
