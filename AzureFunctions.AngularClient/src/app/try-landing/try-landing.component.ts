@@ -62,6 +62,10 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         super('try-landing', broadcastService);
         this._armTryService = _armService as ArmTryService;
         this.discoverMoreUri = `${window.location.protocol}//azure.microsoft.com/${window.navigator.language}/services/functions/`;
+        if (!window.appsvc.env.reCAPTCHASiteKey && window.location.hostname === 'localhost') {
+            // default to tryAppService hostest reCaptcha redirection
+            this.disableTry = false;
+        }
     }
 
     public resolved(captchaResponse: string) {
@@ -82,8 +86,10 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
         this.selectedLanguage = this._tryFunctionsService.selectedLanguage || 'JavaScript';
 
         this._globalStateService.setBusyState();
-        if (!this._globalStateService.TryAppServiceToken) {
-          this.disableTry = true;
+        if (!this._globalStateService.TryAppServiceToken && window.appsvc.env.reCAPTCHASiteKey) {
+            this.reCAPTCHASiteKey = window.appsvc.env.reCAPTCHASiteKey;
+        } else {
+            this.disableTry = false;
         }
 
         this._userService.getStartupInfo()
@@ -93,18 +99,6 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
             })
             .subscribe(templates => {
                 this._globalStateService.clearBusyState();
-                if (window.location.hostname === 'localhost' && !window.appsvc.env.reCAPTCHASiteKey) {
-                  // default to tryAppService hostest reCaptcha redirection
-                  this.reCAPTCHASiteKey = null;
-                  this.disableTry = false;
-                } else if (window.appsvc.env.reCAPTCHASiteKey) {
-                  this.reCAPTCHASiteKey = window.appsvc.env.reCAPTCHASiteKey;
-                } else {
-                  // default to tryAppService hosted reCaptcha redirection
-                  this.reCAPTCHASiteKey = null;
-                  this.disableTry = false;
-                }
-
                 if (this._globalStateService.TryAppServiceToken) {
                     const selectedTemplate: FunctionTemplate = templates.find((t) => {
                         return t.id === this.selectedFunction + '-' + this.selectedLanguage;
@@ -193,46 +187,46 @@ export class TryLandingComponent extends ErrorableComponent implements OnInit, O
                         // login
                         // get trial account
                         if (this.captchaCode) {
-                          this._tryFunctionsService.authenticateTryAppService(this.captchaCode, selectedTemplate, 'reCAPTCHA', functionName);
+                            this._tryFunctionsService.authenticateTryAppService(this.captchaCode, selectedTemplate, 'reCAPTCHA', functionName);
                         } else {
-                          this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
-                            .subscribe((resource) => {
-                                this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
-                                this.createFunctioninResource(resource, selectedTemplate, functionName);
-                                this._globalStateService.tryProgress = TryProgress.ResourceCreated;
-                            }, (error: Response) => {
-                                if (error.status === 401 || error.status === 403) {
-                                    // show login options
-                                    const headerObject = error.headers.get('LoginUrl');
-                                    if (provider !== '' && headerObject) {
-                                        (<any>window).location = headerObject;
-                                        return;
-                                    } else {
-                                        this.loginOptions = true;
-                                    }
-                                    this.clearBusyState();
-                                } else if (error.status === 400) {
-                                    this._tryFunctionsService.getTrialResource(provider)
-                                        .subscribe((resource) => {
-                                            this._globalStateService.tryProgress = TryProgress.ResourceCreated;
-                                            this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
+                            this._tryFunctionsService.createTrialResource(selectedTemplate, provider, functionName)
+                                .subscribe((resource) => {
+                                    this._aiService.trackEvent('resource-provisioned', { template: selectedTemplate.id, result: 'success', first: 'true' });
+                                    this.createFunctioninResource(resource, selectedTemplate, functionName);
+                                    this._globalStateService.tryProgress = TryProgress.ResourceCreated;
+                                }, (error: Response) => {
+                                    if (error.status === 401 || error.status === 403) {
+                                        // show login options
+                                        const headerObject = error.headers.get('LoginUrl');
+                                        if (provider !== '' && headerObject) {
+                                            (<any>window).location = headerObject;
+                                            return;
+                                        } else {
+                                            this.loginOptions = true;
                                         }
-                                        );
-                                } else {
-                                  this.disableTry = true;
-                                  this.captchaCode = null;
-                                  this.showComponentError({
+                                        this.clearBusyState();
+                                    } else if (error.status === 400) {
+                                        this._tryFunctionsService.getTrialResource(provider)
+                                            .subscribe((resource) => {
+                                                this._globalStateService.tryProgress = TryProgress.ResourceCreated;
+                                                this.navigateToFunctioninResource(resource, selectedTemplate, this._tryFunctionsService.selectedFunctionName);
+                                            }
+                                            );
+                                    } else {
+                                    this.disableTry = true;
+                                    this.captchaCode = null;
+                                    this.showComponentError({
                                         message: `${this._translateService.instant(PortalResources.tryLanding_functionError)}`,
                                         details: `${this._translateService.instant(PortalResources.tryLanding_functionErrorDetails)}: ${JSON.stringify(error)}`,
                                         errorId: errorIds.tryAppServiceError,
                                         resourceId: 'try-app'
-                                    });
+                                        });
                                     this.clearBusyState();
                                     throw error;
                                 }
                                 this.clearBusyState();
                             });
-                          }
+                        }
                     } catch (e) {
                         this.showComponentError({
                             message: `${this._translateService.instant(PortalResources.tryLanding_functionError)}`,

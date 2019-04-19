@@ -180,6 +180,11 @@
   dependencies:
     typescript "~2.6.2"
 
+"@types/grecaptcha@^2.0.33":
+  version "2.0.36"
+  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-2.0.36.tgz#c5eaf271ac8a170f073f85aa2e28f2ca3b61df40"
+  integrity sha512-SfzcAJPls94/Lz1FznWe6Vm9NLkakhGmk3EO7g2QdkDDR2OU4FH63YILnDpGIU6l7gPnsf5WQ81Kr05JOYAlZw==
+
 "@types/jasmine@2.5.38":
   version "2.5.38"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.38.tgz#a4379124c4921d4e21de54ec74669c9e9b356717"
@@ -4156,6 +4161,13 @@ ncname@1.0.x:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+
+ng-recaptcha@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/ng-recaptcha/-/ng-recaptcha-3.0.5.tgz#e22a20800901f5cf4468cf5f5d69af01f1220793"
+  integrity sha1-4ioggAkB9c9EaM9fXWmvAfEiB5M=
+  optionalDependencies:
+    "@types/grecaptcha" "^2.0.33"
 
 ng-sidebar@^6.0.1:
   version "6.0.5"
